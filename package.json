@@ -1,0 +1,22 @@
+{
+  "name": "douglass.io",
+  "version": "1.0.0",
+  "description": "Agar.io clone for class.",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatGamer23/douglass.io.git"
+  },
+  "author": "Luke Filler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CatGamer23/douglass.io/issues"
+  },
+  "homepage": "https://github.com/CatGamer23/douglass.io#readme",
+  "dependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
