@@ -1,0 +1,1 @@
+const canvas=document.getElementById("canvas"),context=canvas.getContext("2d");canvas.height=window.innerHeight,canvas.width=window.innerWidth;const centerY=canvas.height/2,centerX=canvas.width/2;context.beginPath(),context.arc(centerX,centerY,70,0,2*Math.PI,!1),context.fillStyle="green",context.fill(),context.lineWidth=5,context.strokeStyle="#003300",context.stroke();
