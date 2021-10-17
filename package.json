@@ -18,6 +18,7 @@
   "homepage": "https://github.com/CatGamer23/douglass.io#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "socket.io": "^4.3.1"
   }
 }
