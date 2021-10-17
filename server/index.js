@@ -1,6 +1,7 @@
 // Imports
 const express = require("express");
 const process = require("process");
+const fs = require("fs");
 
 // Variables
 const app = express();
