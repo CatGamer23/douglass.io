@@ -2,9 +2,9 @@
   "name": "douglass.io",
   "version": "1.0.0",
   "description": "Agar.io clone for class.",
-  "main": "index.js",
+  "main": "./server/server.js",
   "scripts": {
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./server/server.js"
   },
   "repository": {
     "type": "git",
