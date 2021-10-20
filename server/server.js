@@ -10,10 +10,11 @@ const fs = require("fs");
 
 // Variables
 const config = require("../config.json");
+const ip = process.env.IP || config.host;
 const port = process.env.PORT || config.port;
 
 // Main Code
-app.use(express.static(__dirname + "/../client"));
+app.use(express.static(__dirname + "./../client"));
 
 io.on("connection", function (socket) {
   console.log("Somebody connected!");
@@ -21,5 +22,5 @@ io.on("connection", function (socket) {
 });
 
 http.listen(port, () => {
-  console.log(`Douglass.io listening at http://127.0.0.1:${port}`);
+  console.log(`[INFO] Douglass.io listening at http://${ip}:${port}`);
 });
