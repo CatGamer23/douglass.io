@@ -6,8 +6,6 @@ tasks:
       npm run start
       echo $TEMP
 
-
-
 ports:
   - port: 3000
     onOpen: open-preview
