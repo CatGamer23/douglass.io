@@ -5,6 +5,7 @@ const config = require("./config");
 // Variables
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const playerNameInput = document.getElementById("playerNameInput");
 
 // Canvas Size
 canvas.height = window.innerHeight;
@@ -27,7 +28,7 @@ window.onload = () => {
   };
 
   startButton.onclick = () => {
-    console.log("Clicked: " + document.getElementById("playerName").value);
+    console.log("Clicked: " + playerNameInput.value);
     // Checks if the nick is valid.
     if (validNick()) {
       nickErrorText.style.opacity = 0;
