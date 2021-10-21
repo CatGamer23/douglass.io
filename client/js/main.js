@@ -1,15 +1,44 @@
 // Imports
 const io = require("socket.io-client");
-const config = require("./config");
+const config = require("./config.js");
 
 // Variables
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const playerNameInput = document.getElementById("playerNameInput");
+var socket;
 
 // Canvas Size
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
+
+// Checks if the device is mobile
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  config.mobile = true;
+}
+
+function startGame(type) {
+  config.playerName = playerNameInput.value
+    .replace(/(<([^>]+)>)/gi, "")
+    .substring(0, 25);
+  config.playerType = type;
+
+  config.screenWidth = window.innerWidth;
+  config.screenHeight = window.innerHeight;
+
+  document.getElementById("startMenuWrapper").style.maxHeight = "0px";
+  document.getElementById("gameAreaWrapper").style.opacity = 1;
+  if (!socket) {
+    socket = io({ query: "type=" + type });
+    setupSocket(socket);
+  }
+  if (!config.animLoopHandle) animloop();
+  socket.emit("respawn");
+  // window.chat.socket = socket;
+  // window.chat.registerFunctions();
+  // window.canvas.socket = socket;
+  global.socket = socket;
+}
 
 // Checks if the nick chosen contains valid alphanumeric characters (and underscores).
 function validNick() {
@@ -50,9 +79,9 @@ window.onload = () => {
   };
 
   playerNameInput.addEventListener("keypress", (e) => {
-    var key = e.which || e.keyCode;
+    var key = e.code;
 
-    if (key === global.KEY_ENTER) {
+    if (key === config.KEY_ENTER) {
       // Checks if the nick is valid.
       if (validNick()) {
         nickErrorText.style.opacity = 0;

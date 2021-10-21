@@ -4,6 +4,7 @@
   "description": "Agar.io clone for class.",
   "main": "server.js",
   "scripts": {
+    "build": "clear && browserify ./client/js/main.js -o ./client/js/bundle.js",
     "start": "clear && nodemon ./server/server.js -e \"js,html,css,json\""
   },
   "repository": {
@@ -17,8 +18,10 @@
   },
   "homepage": "https://github.com/CatGamer23/douglass.io#readme",
   "dependencies": {
+    "browserify": "^17.0.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.13",
-    "socket.io": "^4.3.1"
+    "socket.io": "^4.3.1",
+    "socket.io-client": "^4.3.2"
   }
 }
