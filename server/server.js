@@ -16,7 +16,7 @@ const port = process.env.PORT || config.port;
 // Main Code
 app.use(express.static(__dirname + "./../client"));
 
-io.on("connection", function (socket) {
+io.on("connection", (socket) => {
   console.log("Somebody connected!");
   // Write your serverside code here
 });
