@@ -80,7 +80,7 @@ window.onload = () => {
   };
 
   playerNameInput.addEventListener("keypress", (e) => {
-    const key = e.code;
+    const key = e.key;
 
     if (key === config.KEY_ENTER) {
       if (validNick()) {
