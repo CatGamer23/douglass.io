@@ -15,7 +15,7 @@ gulp.task("lint", async () => {
     .pipe(
       jshint({
         // esnext: true,
-        esversion: 8
+        esversion: 8,
       })
     )
     .pipe(jshint.reporter("default", { verbose: true }))
@@ -66,9 +66,15 @@ gulp.task("build", gulp.series("build-client", "build-server", "test"));
 gulp.task(
   "watch",
   gulp.series("build", async () => {
-    gulp.watch(["src/client/**/*.*"], ["build-client", "move-client"]);
-    gulp.watch(["src/server/*.*", "src/server/**/*.js"], ["build-server"]);
-    gulp.start("run-only");
+    gulp.watch(
+      ["src/client/**/*.*"],
+      gulp.series("build-client", "move-client")
+    );
+    gulp.watch(
+      ["src/server/*.*", "src/server/**/*.js"],
+      gulp.series("build-server")
+    );
+    gulp.series("run-only");
   })
 );
 
