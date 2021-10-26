@@ -6,11 +6,7 @@ const SAT = require("sat");
 const sql = require("mysql");
 
 // Import game settings.
-<<<<<<< HEAD:src/server/server.js
-const c = require('./../../config.json');
-=======
 const c = require("./../config.json");
->>>>>>> 11e8e97aac7912d227d58369dd2992268bd68090:server/server.js
 
 // Import utilities.
 const util = require("./util");
@@ -58,9 +54,7 @@ app.use(express.static(__dirname + "./../client"));
 function addFood(toAdd) {
   var radius = util.massToRadius(c.foodMass);
   while (toAdd--) {
-    var position = c.foodUniformDisposition
-      ? util.uniformPosition(food, radius)
-      : util.randomPosition(radius);
+    var position = c.foodUniformDisposition ? util.uniformPosition(food, radius) : util.randomPosition(radius); // prettier-ignore
     food.push({
       // Make IDs unique.
       id: (new Date().getTime() + "" + food.length) >>> 0,
@@ -81,9 +75,7 @@ function addVirus(toAdd) {
       true
     );
     var radius = util.massToRadius(mass);
-    var position = c.virusUniformDisposition
-      ? util.uniformPosition(virus, radius)
-      : util.randomPosition(radius);
+    var position = c.virusUniformDisposition ? util.uniformPosition(virus, radius) : util.randomPosition(radius); // prettier-ignore
     virus.push({
       id: (new Date().getTime() + "" + virus.length) >>> 0,
       x: position.x,
@@ -256,9 +248,7 @@ io.on("connection", function (socket) {
   var type = socket.handshake.query.type;
   var radius = util.massToRadius(c.defaultPlayerMass);
   var position =
-    c.newPlayerInitialPosition == "farthest"
-      ? util.uniformPosition(users, radius)
-      : util.randomPosition(radius);
+    c.newPlayerInitialPosition == "farthest" ? util.uniformPosition(users, radius) : util.randomPosition(radius); // prettier-ignore
 
   var cells = [];
   var massTotal = 0;
@@ -306,9 +296,7 @@ io.on("connection", function (socket) {
 
       var radius = util.massToRadius(c.defaultPlayerMass);
       var position =
-        c.newPlayerInitialPosition == "farthest"
-          ? util.uniformPosition(users, radius)
-          : util.randomPosition(radius);
+        c.newPlayerInitialPosition == "farthest" ? util.uniformPosition(users, radius) : util.randomPosition(radius); // prettier-ignore
 
       player.x = position.x;
       player.y = position.y;

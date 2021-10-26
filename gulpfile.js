@@ -27,12 +27,12 @@ gulp.task("move-client", () => {
     .pipe(gulp.dest("./bin/client/"));
 });
 
-// gulp.task(
-//   "test",
-//   gulp.series("lint", () => {
-//     gulp.src(["test/**/*.js"]).pipe(mocha());
-//   })
-// );
+gulp.task(
+  "test",
+  gulp.series("lint", () => {
+    gulp.src(["./test/**/*.js"]).pipe(mocha());
+  })
+);
 
 gulp.task(
   "build-client",
@@ -41,7 +41,7 @@ gulp.task(
       gulp
         .src(["src/client/js/main.js"])
         .pipe(uglify())
-        //.pipe(webpack(require("./webpack.config.js")))
+        .pipe(webpack(require("./webpack.config.js")))
         .pipe(
           babel({
             presets: [["es2015", { modules: false }]],
