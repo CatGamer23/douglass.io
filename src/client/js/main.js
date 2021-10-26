@@ -202,24 +202,24 @@ function setupSocket(socket) {
   socket.on("playerDied", (data) => {
     window.chat.addSystemLine(
       "{GAME} - <b>" +
-      (data.name.length < 1 ? "An unnamed cell" : data.name) +
-      "</b> was eaten."
+        (data.name.length < 1 ? "An unnamed cell" : data.name) +
+        "</b> was eaten."
     );
   });
 
   socket.on("playerDisconnect", (data) => {
     window.chat.addSystemLine(
       "{GAME} - <b>" +
-      (data.name.length < 1 ? "An unnamed cell" : data.name) +
-      "</b> disconnected."
+        (data.name.length < 1 ? "An unnamed cell" : data.name) +
+        "</b> disconnected."
     );
   });
 
   socket.on("playerJoin", (data) => {
     window.chat.addSystemLine(
       "{GAME} - <b>" +
-      (data.name.length < 1 ? "An unnamed cell" : data.name) +
-      "</b> joined."
+        (data.name.length < 1 ? "An unnamed cell" : data.name) +
+        "</b> joined."
     );
   });
 
@@ -417,28 +417,28 @@ function drawPlayers(order) {
       } else {
         x = valueInRange(
           -cellCurrent.x -
-          player.x +
-          config.screenWidth / 2 +
-          cellCurrent.radius / 3,
+            player.x +
+            config.screenWidth / 2 +
+            cellCurrent.radius / 3,
           config.gameWidth -
-          cellCurrent.x +
-          config.gameWidth -
-          player.x +
-          config.screenWidth / 2 -
-          cellCurrent.radius / 3,
+            cellCurrent.x +
+            config.gameWidth -
+            player.x +
+            config.screenWidth / 2 -
+            cellCurrent.radius / 3,
           x
         );
         y = valueInRange(
           -cellCurrent.y -
-          player.y +
-          config.screenHeight / 2 +
-          cellCurrent.radius / 3,
+            player.y +
+            config.screenHeight / 2 +
+            cellCurrent.radius / 3,
           config.gameHeight -
-          cellCurrent.y +
-          config.gameHeight -
-          player.y +
-          config.screenHeight / 2 -
-          cellCurrent.radius / 3,
+            cellCurrent.y +
+            config.gameHeight -
+            player.y +
+            config.screenHeight / 2 -
+            cellCurrent.radius / 3,
           y
         );
       }
@@ -542,9 +542,7 @@ function drawborder() {
     graph.beginPath();
     graph.moveTo(
       config.screenWidth / 2 - player.x,
-      0
-        ? player.y > config.screenHeight / 2
-        : config.screenHeight / 2 - player.y
+      0 ? player.y > config.screenHeight / 2 : config.screenHeight / 2 - player.y // prettier-ignore
     );
     graph.lineTo(
       config.screenWidth / 2 - player.x,
@@ -558,7 +556,7 @@ function drawborder() {
   if (player.y <= config.screenHeight / 2) {
     graph.beginPath();
     graph.moveTo(
-      0 ? player.x > config.screenWidth / 2 : config.screenWidth / 2 - player.x,
+      0 ? player.x > config.screenWidth / 2 : config.screenWidth / 2 - player.x, // prettier-ignore
       config.screenHeight / 2 - player.y
     );
     graph.lineTo(
@@ -720,11 +718,11 @@ function resize() {
   player.screenWidth =
     c.width =
     config.screenWidth =
-    config.playerType == "player" ? window.innerWidth : config.gameWidth;
+      config.playerType == "player" ? window.innerWidth : config.gameWidth;
   player.screenHeight =
     c.height =
     config.screenHeight =
-    config.playerType == "player" ? window.innerHeight : config.gameHeight;
+      config.playerType == "player" ? window.innerHeight : config.gameHeight;
 
   if (config.playerType == "spectate") {
     player.x = config.gameWidth / 2;

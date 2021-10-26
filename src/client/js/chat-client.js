@@ -8,13 +8,12 @@ class ChatClient {
     this.player = config.player;
     var self = this;
     this.commands = {};
-    const input = document.getElementById("chatInput");
-    input.addEventListener("keypress", this.sendChat.bind(this));
-    input.addEventListener("keyup", (key) => {
-      input = document.getElementById("chatInput");
+    const chatInput = document.getElementById("chatInput");
+    chatInput.addEventListener("keypress", this.sendChat.bind(this));
+    chatInput.addEventListener("keyup", (key) => {
       key = key.code;
       if (key === config.KEY_ESC) {
-        input.value = "";
+        chatInput.value = "";
         self.canvas.cv.focus();
       }
     });
@@ -112,12 +111,12 @@ class ChatClient {
   // Sends a message or executes a command on the click of enter.
   sendChat(key) {
     const commands = this.commands;
-    const input = document.getElementById("chatInput");
+    const chatInput = document.getElementById("chatInput");
 
     key = key.code;
 
     if (key === config.KEY_ENTER) {
-      var text = input.value.replace(/(<([^>]+)>)/gi, "");
+      var text = chatInput.value.replace(/(<([^>]+)>)/gi, "");
       if (text !== "") {
         // Chat command.
         if (text.indexOf("-") === 0) {
@@ -140,7 +139,7 @@ class ChatClient {
         }
 
         // Resets input.
-        input.value = "";
+        chatInput.value = "";
         this.canvas.cv.focus();
       }
     }

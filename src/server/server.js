@@ -6,7 +6,7 @@ const SAT = require('sat');
 const sql = require ("mysql");
 
 // Import game settings.
-const c = require('./../config.json');
+const c = require('./../../config.json');
 
 // Import utilities.
 const util = require('./util');

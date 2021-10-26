@@ -1,4 +1,4 @@
-const cfg = require("./../config.json");
+const cfg = require("./../../config.json");
 
 exports.validNick = function (nickname) {
   var regex = /^\w*$/;
