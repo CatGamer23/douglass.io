@@ -299,7 +299,7 @@ function setupSocket(socket) {
         window.cancelAnimationFrame(config.animLoopHandle);
         config.animLoopHandle = undefined;
       }
-    }, 2500);
+    }, 75);
   });
 
   socket.on("kick", (data) => {

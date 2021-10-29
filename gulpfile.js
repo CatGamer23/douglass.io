@@ -94,7 +94,7 @@ gulp.task(
       cwd: "./bin/",
       args: ["config.json"],
       ext: "html js css",
-    }).on("restart", async () => {
+    }).on("restart", () => {
       util.log("Server Restarted!");
     });
   })
@@ -107,7 +107,7 @@ gulp.task("run-only", async () => {
     cwd: "./bin/",
     args: ["config.json"],
     ext: "html js css",
-  }).on("restart", async () => {
+  }).on("restart", () => {
     util.log("Server Restarted!");
   });
 });
