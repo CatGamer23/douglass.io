@@ -1,9 +1,11 @@
+// Module Imports
 const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const SAT = require("sat");
 const sql = require("mysql");
+const quadtree = require("simple-quadtree");
 
 // Import game settings.
 const c = require("./../config.json");
@@ -11,12 +13,10 @@ const c = require("./../config.json");
 // Import utilities.
 const util = require("./util");
 
-// Import quadtree.
-const quadtree = require("simple-quadtree");
-
-//call sqlinfo
+// Call sqlinfo
 var s = c.sqlinfo;
 
+// Variables
 var tree = quadtree(0, 0, c.gameWidth, c.gameHeight);
 
 var users = [];
@@ -243,7 +243,7 @@ function balanceMass() {
 }
 
 io.on("connection", function (socket) {
-  console.log("A user connected!", socket.handshake.query.type);
+  // console.log("A user connected!", socket.handshake.query.type);
 
   var type = socket.handshake.query.type;
   var radius = util.massToRadius(c.defaultPlayerMass);
@@ -608,9 +608,9 @@ function tickPlayer(currentPlayer) {
         ) *
           1.75
     ) {
-      console.log("[DEBUG] Killing user: " + collision.bUser.id);
-      console.log("[DEBUG] Collision info:");
-      console.log(collision);
+      // console.log("[DEBUG] Killing user: " + collision.bUser.id);
+      // console.log("[DEBUG] Collision info:");
+      // console.log(collision);
 
       var numUser = util.findIndex(users, collision.bUser.id);
       if (numUser > -1) {
@@ -851,5 +851,5 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || process.env.IP || c.host;
 var serverport =
   process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || c.port;
 http.listen(serverport, ipaddress, function () {
-  console.log("[DEBUG] Listening on " + ipaddress + ":" + serverport);
+  // console.log("[DEBUG] Listening on " + ipaddress + ":" + serverport);
 });
