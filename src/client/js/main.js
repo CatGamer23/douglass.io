@@ -13,7 +13,7 @@ var reason;
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+if (/Mobi/.test(navigator.userAgent)) {
   config.mobile = true;
 }
 
@@ -244,7 +244,7 @@ function setupSocket(socket) {
         else status += i + 1 + ". An unnamed cell";
       }
     }
-    //status += '<br />Players: ' + data.players;
+    status += '<br />Players: ' + data.players;
     document.getElementById("status").innerHTML = status;
   });
 
