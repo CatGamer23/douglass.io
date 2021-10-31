@@ -40,7 +40,7 @@ if (s.host !== "DEFAULT") {
   });
 
   //log sql errors
-  pool.connect(function (err) {
+  pool.connect((err) => {
     if (err) {
       console.log(err);
     }
@@ -211,13 +211,7 @@ function moveMass(mass) {
 function balanceMass() {
   var totalMass =
     food.length * c.foodMass +
-    users
-      .map(function (u) {
-        return u.massTotal;
-      })
-      .reduce(function (pu, cu) {
-        return pu + cu;
-      }, 0);
+    users.map((u) => u.massTotal).reduce((pu, cu) => pu + cu, 0);
 
   var massDiff = c.gameMass - totalMass;
   var maxFoodDiff = c.maxFood - food.length;
@@ -242,13 +236,11 @@ function balanceMass() {
   }
 }
 
-io.on("connection", function (socket) {
+io.on("connection", (socket) => {
   // console.log("A user connected!", socket.handshake.query.type);
-
   var type = socket.handshake.query.type;
   var radius = util.massToRadius(c.defaultPlayerMass);
-  var position =
-    c.newPlayerInitialPosition == "farthest" ? util.uniformPosition(users, radius) : util.randomPosition(radius); // prettier-ignore
+  var position = c.newPlayerInitialPosition == "farthest" ? util.uniformPosition(users, radius) : util.randomPosition(radius); // prettier-ignore
 
   var cells = [];
   var massTotal = 0;
@@ -281,7 +273,7 @@ io.on("connection", function (socket) {
     },
   };
 
-  socket.on("gotit", function (player) {
+  socket.on("gotit", (player) => {
     console.log("[INFO] Player " + player.name + " connecting!");
 
     if (util.findIndex(users, player.id) > -1) {
@@ -295,8 +287,7 @@ io.on("connection", function (socket) {
       sockets[player.id] = socket;
 
       var radius = util.massToRadius(c.defaultPlayerMass);
-      var position =
-        c.newPlayerInitialPosition == "farthest" ? util.uniformPosition(users, radius) : util.randomPosition(radius); // prettier-ignore
+      var position = c.newPlayerInitialPosition == "farthest" ? util.uniformPosition(users, radius) : util.randomPosition(radius); // prettier-ignore
 
       player.x = position.x;
       player.y = position.y;
@@ -331,23 +322,23 @@ io.on("connection", function (socket) {
     }
   });
 
-  socket.on("pingcheck", function () {
+  socket.on("pingcheck", () => {
     socket.emit("pongcheck");
   });
 
-  socket.on("windowResized", function (data) {
+  socket.on("windowResized", (data) => {
     currentPlayer.screenWidth = data.screenWidth;
     currentPlayer.screenHeight = data.screenHeight;
   });
 
-  socket.on("respawn", function () {
+  socket.on("respawn", () => {
     if (util.findIndex(users, currentPlayer.id) > -1)
       users.splice(util.findIndex(users, currentPlayer.id), 1);
     socket.emit("welcome", currentPlayer);
     console.log("[INFO] User " + currentPlayer.name + " respawned!");
   });
 
-  socket.on("disconnect", function () {
+  socket.on("disconnect", () => {
     if (util.findIndex(users, currentPlayer.id) > -1)
       users.splice(util.findIndex(users, currentPlayer.id), 1);
     console.log("[INFO] User " + currentPlayer.name + " disconnected!");
@@ -355,7 +346,7 @@ io.on("connection", function (socket) {
     socket.broadcast.emit("playerDisconnect", { name: currentPlayer.name });
   });
 
-  socket.on("playerChat", function (data) {
+  socket.on("playerChat", (data) => {
     var _sender = data.sender.replace(/(<([^>]+)>)/gi, "");
     var _message = data.message.replace(/(<([^>]+)>)/gi, "");
     if (c.logChat === 1) {
@@ -376,7 +367,7 @@ io.on("connection", function (socket) {
     });
   });
 
-  socket.on("pass", function (data) {
+  socket.on("pass", (data) => {
     if (data[0] === c.adminPass) {
       console.log(
         "[ADMIN] " + currentPlayer.name + " just logged in as an admin!"
@@ -403,7 +394,7 @@ io.on("connection", function (socket) {
     }
   });
 
-  socket.on("kick", function (data) {
+  socket.on("kick", (data) => {
     if (currentPlayer.admin) {
       var reason = "";
       var worked = false;
@@ -459,14 +450,14 @@ io.on("connection", function (socket) {
   });
 
   // Heartbeat function, update everytime.
-  socket.on("0", function (target) {
+  socket.on("0", (target) => {
     currentPlayer.lastHeartbeat = new Date().getTime();
     if (target.x !== currentPlayer.x || target.y !== currentPlayer.y) {
       currentPlayer.target = target;
     }
   });
 
-  socket.on("1", function () {
+  socket.on("1", () => {
     // Fire food.
     for (var i = 0; i < currentPlayer.cells.length; i++) {
       if (
@@ -502,7 +493,7 @@ io.on("connection", function (socket) {
       }
     }
   });
-  socket.on("2", function (virusCell) {
+  socket.on("2", (virusCell) => {
     function splitCell(cell) {
       if (cell && cell.mass && cell.mass >= c.defaultPlayerMass * 2) {
         cell.mass = cell.mass / 2;
@@ -635,19 +626,19 @@ function tickPlayer(currentPlayer) {
       currentCell.radius
     );
 
-    var foodEaten = food.map(funcFood).reduce(function (a, b, c) {
-      return b ? a.concat(c) : a;
-    }, []);
+    var foodEaten = food
+      .map(funcFood)
+      .reduce((a, b, c) => (b ? a.concat(c) : a), []);
 
     foodEaten.forEach(deleteFood);
 
-    var massEaten = massFood.map(eatMass).reduce(function (a, b, c) {
-      return b ? a.concat(c) : a;
-    }, []);
+    var massEaten = massFood
+      .map(eatMass)
+      .reduce((a, b, c) => (b ? a.concat(c) : a), []);
 
-    var virusCollision = virus.map(funcFood).reduce(function (a, b, c) {
-      return b ? a.concat(c) : a;
-    }, []);
+    var virusCollision = virus
+      .map(funcFood)
+      .reduce((a, b, c) => (b ? a.concat(c) : a), []);
 
     if (virusCollision > 0 && currentCell.mass > virus[virusCollision].mass) {
       sockets[currentPlayer.id].emit("virusSplit", z);
@@ -694,9 +685,7 @@ function moveloop() {
 
 function gameloop() {
   if (users.length > 0) {
-    users.sort(function (a, b) {
-      return b.massTotal - a.massTotal;
-    });
+    users.sort((a, b) => b.massTotal - a.massTotal);
 
     var topUsers = [];
 
@@ -738,13 +727,13 @@ function gameloop() {
 }
 
 function sendUpdates() {
-  users.forEach(function (u) {
+  users.forEach((u) => {
     // center the view if x/y is undefined, this will happen for spectators
     u.x = u.x || c.gameWidth / 2;
     u.y = u.y || c.gameHeight / 2;
 
     var visibleFood = food
-      .map(function (f) {
+      .map((f) => {
         if (
           f.x > u.x - u.screenWidth / 2 - 20 &&
           f.x < u.x + u.screenWidth / 2 + 20 &&
@@ -754,12 +743,10 @@ function sendUpdates() {
           return f;
         }
       })
-      .filter(function (f) {
-        return f;
-      });
+      .filter((f) => f);
 
     var visibleVirus = virus
-      .map(function (f) {
+      .map((f) => {
         if (
           f.x > u.x - u.screenWidth / 2 - f.radius &&
           f.x < u.x + u.screenWidth / 2 + f.radius &&
@@ -769,12 +756,10 @@ function sendUpdates() {
           return f;
         }
       })
-      .filter(function (f) {
-        return f;
-      });
+      .filter((f) => f);
 
     var visibleMass = massFood
-      .map(function (f) {
+      .map((f) => {
         if (
           f.x + f.radius > u.x - u.screenWidth / 2 - 20 &&
           f.x - f.radius < u.x + u.screenWidth / 2 + 20 &&
@@ -784,12 +769,10 @@ function sendUpdates() {
           return f;
         }
       })
-      .filter(function (f) {
-        return f;
-      });
+      .filter((f) => f);
 
     var visibleCells = users
-      .map(function (f) {
+      .map((f) => {
         for (var z = 0; z < f.cells.length; z++) {
           if (
             f.cells[z].x + f.cells[z].radius > u.x - u.screenWidth / 2 - 20 &&
@@ -821,9 +804,7 @@ function sendUpdates() {
           }
         }
       })
-      .filter(function (f) {
-        return f;
-      });
+      .filter((f) => f);
 
     sockets[u.id].emit(
       "serverTellPlayerMove",
@@ -850,6 +831,6 @@ setInterval(sendUpdates, 1000 / c.networkUpdateFactor);
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || process.env.IP || c.host;
 var serverport =
   process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || c.port;
-http.listen(serverport, ipaddress, function () {
-  // console.log("[DEBUG] Listening on " + ipaddress + ":" + serverport);
+http.listen(serverport, ipaddress, () => {
+  console.log("[DEBUG] Listening on " + ipaddress + ":" + serverport);
 });

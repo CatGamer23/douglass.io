@@ -1,45 +1,37 @@
 const cfg = require("./../../config.json");
 
-exports.validNick = function (nickname) {
+exports.validNick = (nickname) => {
   var regex = /^\w*$/;
   return regex.exec(nickname) !== null;
 };
 
 // determine mass from radius of circle
-exports.massToRadius = function (mass) {
-  return 4 + Math.sqrt(mass) * 6;
-};
+exports.massToRadius = (mass) => 4 + Math.sqrt(mass) * 6;
 
 // overwrite Math.log function
-exports.log = (function () {
+exports.log = (() => {
   var log = Math.log;
-  return function (n, base) {
-    return log(n) / (base ? log(base) : 1);
-  };
+  return (n, base) => log(n) / (base ? log(base) : 1);
 })();
 
 // get the Euclidean distance between the edges of two shapes
-exports.getDistance = function (p1, p2) {
-  return (
-    Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)) -
-    p1.radius -
-    p2.radius
-  );
-};
+exports.getDistance = (point1, point2) =>
+  Math.sqrt(
+    Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2)
+  ) -
+  point1.radius -
+  point2.radius;
 
-exports.randomInRange = function (from, to) {
-  return Math.floor(Math.random() * (to - from)) + from;
-};
+exports.randomInRange = (from, to) =>
+  Math.floor(Math.random() * (to - from)) + from;
 
 // generate a random position within the field of play
-exports.randomPosition = function (radius) {
-  return {
-    x: exports.randomInRange(radius, cfg.gameWidth - radius),
-    y: exports.randomInRange(radius, cfg.gameHeight - radius),
-  };
-};
+exports.randomPosition = (radius) => ({
+  x: exports.randomInRange(radius, cfg.gameWidth - radius),
+  y: exports.randomInRange(radius, cfg.gameHeight - radius),
+});
 
-exports.uniformPosition = function (points, radius) {
+exports.uniformPosition = (points, radius) => {
   var bestCandidate,
     maxDistance = 0;
   var numberOfCandidates = 10;
@@ -72,7 +64,7 @@ exports.uniformPosition = function (points, radius) {
   return bestCandidate;
 };
 
-exports.findIndex = function (arr, id) {
+exports.findIndex = (arr, id) => {
   var len = arr.length;
 
   while (len--) {
@@ -84,7 +76,7 @@ exports.findIndex = function (arr, id) {
   return -1;
 };
 
-exports.randomColor = function () {
+exports.randomColor = () => {
   var color =
     "#" + ("00000" + ((Math.random() * (1 << 24)) | 0).toString(16)).slice(-6);
   var c = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
