@@ -1,21 +1,21 @@
 const config = require("./config.js");
 
 class Canvas {
-  constructor(params) {
+  constructor() {
     this.directionLock = false;
     this.target = config.target;
     this.reenviar = true;
     this.socket = config.socket;
     this.directions = [];
-    var self = this;
+    const self = this;
 
-    this.cv = document.getElementById("canvas");
-    this.cv.width = config.screenWidth;
-    this.cv.height = config.screenHeight;
-    this.cv.addEventListener("mousemove", this.gameInput, false);
-    this.cv.addEventListener("mouseout", this.outOfBounds, false);
-    this.cv.addEventListener("keypress", this.keyInput, false);
-    this.cv.addEventListener(
+    this.canvas = document.getElementById("canvas");
+    this.canvas.width = config.screenWidth;
+    this.canvas.height = config.screenHeight;
+    this.canvas.addEventListener("mousemove", this.gameInput, false);
+    this.canvas.addEventListener("mouseout", this.outOfBounds, false);
+    this.canvas.addEventListener("keypress", this.keyInput, false);
+    this.canvas.addEventListener(
       "keyup",
       (event) => {
         self.reenviar = true;
@@ -23,10 +23,10 @@ class Canvas {
       },
       false
     );
-    this.cv.addEventListener("keydown", this.directionDown, false);
-    this.cv.addEventListener("touchstart", this.touchInput, false);
-    this.cv.addEventListener("touchmove", this.touchInput, false);
-    this.cv.parent = self;
+    this.canvas.addEventListener("keydown", this.directionDown, false);
+    this.canvas.addEventListener("touchstart", this.touchInput, false);
+    this.canvas.addEventListener("touchmove", this.touchInput, false);
+    this.canvas.parent = self;
     config.canvas = this;
   }
 

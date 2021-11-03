@@ -186,9 +186,7 @@ function setupSocket(socket) {
     window.chat.addSystemLine("Connected to the game!");
     window.chat.addSystemLine("Type <b>-help</b> for a list of commands.");
     if (config.mobile) {
-      document
-        .getElementById("gameAreaWrapper")
-        .removeChild(document.getElementById("chatbox"));
+      document.getElementById("chatbox").remove();
     }
     c.focus();
   });
