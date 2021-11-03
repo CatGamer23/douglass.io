@@ -7,7 +7,6 @@ const util = require("gulp-util");
 const mocha = require("gulp-mocha");
 const todo = require("gulp-todo");
 const webpack = require("webpack-stream");
-const fs = require("fs");
 
 gulp.task("lint", async () => {
   return gulp
@@ -44,7 +43,7 @@ gulp.task(
       .pipe(webpack(require("./webpack.config.js")))
       .pipe(
         babel({
-          presets: [["es2015", { modules: false }]],
+          presets: [["env", { modules: false }]],
         })
       )
       .pipe(gulp.dest("bin/client/js/"));
