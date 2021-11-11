@@ -28,11 +28,8 @@ gulp.task("move-client", async () => {
 });
 
 gulp.task("move-config", async () => {
-  return gulp
-    .src(["./config.json"])
-    .pipe(gulp.dest("./bin/"));
+  return gulp.src(["./config.json"]).pipe(gulp.dest("./bin/"));
 });
-
 
 gulp.task(
   "test",
@@ -67,7 +64,7 @@ gulp.task(
   })
 );
 
-gulp.task("build", gulp.series("build-client", "build-server", "test"));
+gulp.task("build", gulp.series("build-client", "build-server"));//, "test"));
 
 gulp.task(
   "watch",
@@ -95,9 +92,8 @@ gulp.task(
   "run",
   gulp.series("build", async () => {
     nodemon({
-      // delay: 10,
       script: "./bin/server/server.js",
-      args: ["--quiet"],
+      args: ["--quiet", "--ignore *.*"],
       ext: "html js css",
     }).on("restart", (files) => {
       util.log("App restarted due to: ", files);
@@ -107,9 +103,8 @@ gulp.task(
 
 gulp.task("run-only", async () => {
   nodemon({
-    delay: 10,
-    script: "./bin/server/server.js",
-    args: ["--quiet"],
+    script: "./server/server.js",
+    args: ["--quiet", "--ignore './*.*'"],
     ext: "html js css",
   }).on("restart", (files) => {
     util.log("App restarted due to: ", files);

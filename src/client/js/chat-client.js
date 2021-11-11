@@ -1,7 +1,7 @@
 const config = require("./config.js");
 
 class ChatClient {
-  constructor(params) {
+  constructor() {
     this.canvas = config.canvas;
     this.socket = config.socket;
     this.mobile = config.mobile;

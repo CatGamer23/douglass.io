@@ -140,7 +140,7 @@ continuitySetting.onchange = settings.toggleContinuity;
 const roundFoodSetting = document.getElementById("roundFood");
 roundFoodSetting.onchange = settings.toggleRoundFood;
 
-var c = window.canvas.cv;
+var c = window.canvas.canvas;
 var graph = c.getContext("2d");
 
 $("#feed").click(() => {
