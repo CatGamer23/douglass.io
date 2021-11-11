@@ -6,7 +6,6 @@ class ChatClient {
     this.socket = config.socket;
     this.mobile = config.mobile;
     this.player = config.player;
-    var self = this;
     this.commands = {};
     const chatInput = document.getElementById("chatInput");
     chatInput.addEventListener("keypress", this.sendChat.bind(this));
@@ -14,7 +13,7 @@ class ChatClient {
       key = key.code;
       if (key === config.KEY_ESC) {
         chatInput.value = "";
-        self.canvas.cv.focus();
+        this.canvas.cv.focus();
       }
     });
     config.chatClient = this;
@@ -22,41 +21,40 @@ class ChatClient {
 
   // TODO: Break out many of these GameControls into separate classes.
   registerFunctions() {
-    var self = this;
     this.registerCommand("ping", "Check your latency.", () => {
-      self.checkLatency();
+      this.checkLatency();
     });
 
     this.registerCommand("dark", "Toggle dark mode.", () => {
-      self.toggleDarkMode();
+      this.toggleDarkMode();
     });
 
     this.registerCommand("border", "Toggle visibility of border.", () => {
-      self.toggleBorder();
+      this.toggleBorder();
     });
 
     this.registerCommand("mass", "Toggle visibility of mass.", () => {
-      self.toggleMass();
+      this.toggleMass();
     });
 
     this.registerCommand("continuity", "Toggle continuity.", () => {
-      self.toggleContinuity();
+      this.toggleContinuity();
     });
 
     this.registerCommand("roundfood", "Toggle food drawing.", (args) => {
-      self.toggleRoundFood(args);
+      this.toggleRoundFood(args);
     });
 
     this.registerCommand("help", "Information about the chat commands.", () => {
-      self.printHelp();
+      this.printHelp();
     });
 
     this.registerCommand("login", "Login as an admin.", (args) => {
-      self.socket.emit("pass", args);
+      this.socket.emit("pass", args);
     });
 
     this.registerCommand("kick", "Kick a player, for admins only.", (args) => {
-      self.socket.emit("kick", args);
+      this.socket.emit("kick", args);
     });
 
     config.chatClient = this;

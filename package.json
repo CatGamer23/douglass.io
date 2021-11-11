@@ -4,10 +4,10 @@
   "description": "Agar.io clone for class.",
   "main": "server.js",
   "scripts": {
-    "build": "gulp build",
-    "start": "gulp run",
-    "watch": "gulp watch",
-    "test": "gulp test"
+    "build": "gulp build --silent",
+    "start": "gulp run --silent",
+    "watch": "gulp watch --silent",
+    "test": "gulp test --silent"
   },
   "repository": {
     "type": "git",
