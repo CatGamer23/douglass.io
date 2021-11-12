@@ -283,7 +283,7 @@ io.on("connection", (socket) => {
       socket.emit("kick", "Invalid username.");
       socket.disconnect();
     } else {
-      console.log("[INFO] Player " + player.name + " connected!");
+      player.name ? console.log("[INFO] Player " + player.name + " connected!") : console.log("[INFO] An unnamed cell connected!"); // prettier-ignore
       sockets[player.id] = socket;
 
       var radius = util.massToRadius(c.defaultPlayerMass);
