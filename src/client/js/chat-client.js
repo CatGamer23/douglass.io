@@ -168,10 +168,10 @@ class ChatClient {
   }
 
   toggleDarkMode() {
-    var LIGHT = "#f2fbff",
-      DARK = "#181818";
-    var LINELIGHT = "#000000",
-      LINEDARK = "#ffffff";
+    const LIGHT = config.lightBackgroundColor;
+    const DARK = config.darkBackgroundColor;
+    const LINELIGHT = config.lightLineColor;
+    const LINEDARK = config.darkLineColor;
 
     if (config.backgroundColor === LIGHT) {
       config.backgroundColor = DARK;

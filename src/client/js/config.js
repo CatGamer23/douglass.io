@@ -31,6 +31,10 @@ module.exports = {
   startPingTime: 0,
   toggleMassState: 0,
   // backgroundColor: "#f2fbff",
-  backgroundColor: "#a9a9a9",
-  lineColor: "#a9a9a9",
+  backgroundColor: "#C0C0C0",
+  lineColor: "#696969",
+  lightBackgroundColor: "#C0C0C0",
+  lightLineColor: "#696969",
+  darkBackgroundColor: "#696969",
+  darkLineColor: "#C0C0C0",
 };

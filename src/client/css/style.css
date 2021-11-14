@@ -161,7 +161,8 @@ div {
 }
 
 #startButton,
-#spectateButton {
+#spectateButton,
+#skinSelectorButton {
   position: relative;
   margin: auto;
   margin-top: 10px;
@@ -184,6 +185,8 @@ div {
   margin-bottom: 10px;
 }
 
+#skinSelectorButton:active,
+#skinSelectorButton:hover,
 #spectateButton:active,
 #spectateButton:hover,
 #startButton:active,
