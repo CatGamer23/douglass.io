@@ -32,7 +32,7 @@ const Vector = SAT.Vector;
 const Circle = SAT.Circle;
 
 if (sqlDB.host !== "DEFAULT") {
-  var pool = sqlDB.createConnection({
+  var pool = sql.createConnection({
     host: sqlDB.host,
     user: sqlDB.user,
     password: sqlDB.password,
@@ -278,7 +278,11 @@ io.on("connection", (socket) => {
   };
 
   socket.on("gotit", (player) => {
-    console.log("[INFO] Player " + player.name + " connecting!");
+    if (player.name) {
+      console.log("[INFO] Player " + player.name + " connecting!");
+    } else {
+      console.log("[INFO] An unnamed cell connecting!");
+    }
 
     if (util.findIndex(users, player.id) > -1) {
       console.log("[INFO] Player ID is already connected, kicking.");
@@ -343,7 +347,11 @@ io.on("connection", (socket) => {
     if (util.findIndex(users, currentPlayer.id) > -1)
       users.splice(util.findIndex(users, currentPlayer.id), 1);
     socket.emit("welcome", currentPlayer);
-    console.log("[INFO] User " + currentPlayer.name + " respawned!");
+    if (currentPlayer.name) {
+      console.log("[INFO] Player " + currentPlayer.name + " respawned!");
+    } else {
+      console.log("[INFO] An unnamed cell respawned!");
+    }
   });
 
   socket.on("disconnect", () => {
