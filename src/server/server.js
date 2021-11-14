@@ -14,7 +14,7 @@ const config = require("./../config.json");
 const util = require("./util");
 
 // Call sqlinfo
-const sql = config.sqlinfo;
+const sqlDB = config.sqlinfo;
 
 // Variables
 var tree = quadtree(0, 0, config.gameWidth, config.gameHeight);
@@ -31,12 +31,12 @@ var leaderboardChanged = false;
 const Vector = SAT.Vector;
 const Circle = SAT.Circle;
 
-if (sql.host !== "DEFAULT") {
-  var pool = sql.createConnection({
-    host: sql.host,
-    user: sql.user,
-    password: sql.password,
-    database: sql.database,
+if (sqlDB.host !== "DEFAULT") {
+  var pool = sqlDB.createConnection({
+    host: sqlDB.host,
+    user: sqlDB.user,
+    password: sqlDB.password,
+    database: sqlDB.database,
   });
 
   //log sql errors
