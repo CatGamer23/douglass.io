@@ -107,7 +107,8 @@ function movePlayer(player) {
     var deg = Math.atan2(target.y, target.x);
     var slowDown = 1;
     if (player.cells[i].speed <= 6.25) {
-      slowDown = util.log(player.cells[i].mass, config.slowBase) - initMassLog + 1;
+      slowDown =
+        util.log(player.cells[i].mass, config.slowBase) - initMassLog + 1;
     }
 
     var deltaY = (player.cells[i].speed * Math.sin(deg)) / slowDown;
@@ -135,7 +136,10 @@ function movePlayer(player) {
         );
         var radiusTotal = player.cells[i].radius + player.cells[j].radius;
         if (distance < radiusTotal) {
-          if (player.lastSplit > new Date().getTime() - 1000 * config.mergeTimer) {
+          if (
+            player.lastSplit >
+            new Date().getTime() - 1000 * config.mergeTimer
+          ) {
             if (player.cells[i].x < player.cells[j].x) {
               player.cells[i].x--;
             } else if (player.cells[i].x > player.cells[j].x) {
@@ -283,7 +287,11 @@ io.on("connection", (socket) => {
       socket.emit("kick", "Invalid username.");
       socket.disconnect();
     } else {
-      player.name ? console.log("[INFO] Player " + player.name + " connected!") : console.log("[INFO] An unnamed cell connected!"); // prettier-ignore
+      if (player.name) {
+        console.log("[INFO] Player " + player.name + " connected!");
+      } else {
+        console.log("[INFO] An unnamed cell connected!");
+      }
       sockets[player.id] = socket;
 
       var radius = util.massToRadius(config.defaultPlayerMass);
@@ -461,7 +469,8 @@ io.on("connection", (socket) => {
     // Fire food.
     for (var i = 0; i < currentPlayer.cells.length; i++) {
       if (
-        (currentPlayer.cells[i].mass >= config.defaultPlayerMass + config.fireFood &&
+        (currentPlayer.cells[i].mass >=
+          config.defaultPlayerMass + config.fireFood &&
           config.fireFood > 0) ||
         (currentPlayer.cells[i].mass >= 20 && config.fireFood === 0)
       ) {
@@ -569,7 +578,10 @@ function tickPlayer(currentPlayer) {
         var response = new SAT.Response();
         var collided = SAT.testCircleCircle(
           playerCircle,
-          new Circle(new Vector(user.cells[i].x, user.cells[i].y), user.cells[i].radius),
+          new Circle(
+            new Vector(user.cells[i].x, user.cells[i].y),
+            user.cells[i].radius
+          ),
           response
         );
         if (collided) {
@@ -716,7 +728,8 @@ function gameloop() {
             config.defaultPlayerMass &&
           users[i].massTotal > config.minMassLoss
         ) {
-          var massLoss = users[i].cells[z].mass * (1 - config.massLossRate / 1000);
+          var massLoss =
+            users[i].cells[z].mass * (1 - config.massLossRate / 1000);
           users[i].massTotal -= users[i].cells[z].mass - massLoss;
           users[i].cells[z].mass = massLoss;
         }
@@ -828,7 +841,8 @@ setInterval(gameloop, 1000);
 setInterval(sendUpdates, 1000 / config.networkUpdateFactor);
 
 // Don't touch, IP configurations.
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP || process.env.IP || config.host;
+var ipaddress =
+  process.env.OPENSHIFT_NODEJS_IP || process.env.IP || config.host;
 var serverport =
   process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || config.port;
 http.listen(serverport, ipaddress, () => {
