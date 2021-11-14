@@ -93,7 +93,7 @@ gulp.task(
   gulp.series("build", async () => {
     nodemon({
       script: "./bin/server/server.js",
-      args: ["--quiet", "--ignore *.*"],
+      args: ["--quiet"],
       ext: "html js css",
     }).on("restart", (files) => {
       util.log("App restarted due to: ", files);
@@ -104,7 +104,7 @@ gulp.task(
 gulp.task("run-only", async () => {
   nodemon({
     script: "./server/server.js",
-    args: ["--quiet", "--ignore './*.*'"],
+    args: ["--quiet"],
     ext: "html js css",
   }).on("restart", (files) => {
     util.log("App restarted due to: ", files);
