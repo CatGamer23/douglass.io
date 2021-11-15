@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gulp build --silent",
     "start": "gulp run --silent",
-    "watch": "gulp watch --silent",
+    "watch": "gulp watch",
     "test": "gulp test --silent"
   },
   "repository": {
