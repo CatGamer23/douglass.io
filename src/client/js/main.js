@@ -79,6 +79,17 @@ window.onload = () => {
     }
   };
 
+  const skinSelectorMenu = document.getElementById("skinSelectorButton");
+  const skinSelector = document.getElementById("skinSelector");
+
+  skinSelectorMenu.onclick = () => {
+    if (skinSelector.style.maxHeight == "300px") {
+      skinSelector.style.maxHeight = "0px";
+    } else {
+      skinSelector.style.maxHeight = "300px";
+    }
+  };
+
   playerNameInput.addEventListener("keypress", (e) => {
     const key = e.key;
 

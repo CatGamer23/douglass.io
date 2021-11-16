@@ -161,8 +161,42 @@ div {
 }
 
 #startButton,
-#spectateButton,
-#skinSelectorButton {
+#spectateButton {
+  position: relative;
+  margin: auto;
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  font-size: large;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: rgb(144, 24, 204);
+  border: 0;
+  border-bottom: 2px solid rgb(138, 10, 195);
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px rgb(138, 10, 195);
+  box-shadow: inset 0 -2px rgb(138, 10, 195);
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#spectateButton:active,
+#spectateButton:hover,
+#startButton:active,
+#startButton:hover {
+  top: 1px;
+  background: rgb(183, 98, 230);
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#skinSelectorButton,
+#settingsButton {
   position: relative;
   margin: auto;
   margin-top: 10px;
@@ -187,40 +221,6 @@ div {
 
 #skinSelectorButton:active,
 #skinSelectorButton:hover,
-#spectateButton:active,
-#spectateButton:hover,
-#startButton:active,
-#startButton:hover {
-  top: 1px;
-  background: rgb(183, 98, 230);
-  outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-#settingsButton {
-  position: relative;
-  margin: auto;
-  margin-top: 10px;
-  width: 100%;
-  height: 40px;
-  box-sizing: border-box;
-  font-size: large;
-  color: white;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  background: rgb(144, 24, 204);
-  border: 0;
-  border-bottom: 2px solid rgb(138, 10, 195);
-  cursor: pointer;
-  -webkit-box-shadow: inset 0 -2px rgb(138, 10, 195);
-  box-shadow: inset 0 -2px rgb(138, 10, 195);
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  margin-bottom: 10px;
-}
-
 #settingsButton:active,
 #settingsButton:hover {
   top: 1px;
@@ -231,7 +231,8 @@ div {
 }
 
 #settings,
-#startMenuWrapper {
+#startMenuWrapper,
+#skinSelector {
   -webkit-transition: max-height 1s;
   -moz-transition: max-height 1s;
   -ms-transition: max-height 1s;
@@ -240,7 +241,8 @@ div {
   overflow: hidden;
 }
 
-#settings {
+#settings,
+#skinSelector {
   max-height: 0;
 }
 

@@ -66,15 +66,11 @@ gulp.task(
 
 gulp.task("build", gulp.series("build-client", "build-server")); //, "test"));
 
-gulp.task(
-  "watch",
-  gulp.series("build", async () => {
-    gulp.watch(
-      ["src/**/*.*"],
-      gulp.series("build-server", "build-client", "move-client", "run-only")
-    );
-  })
-);
+gulp.task("watch", async () => {
+  gulp.watch(["src/**/*.*"], gulp.series("build", "run-only", async () => {
+    util.log(util.colors.magenta("Server restarted!"));
+  }));
+});
 
 gulp.task(
   "todo",
