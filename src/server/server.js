@@ -510,7 +510,9 @@ io.on("connection", (socket) => {
       }
     }
   });
+
   socket.on("2", (virusCell) => {
+    // Split
     function splitCell(cell) {
       if (cell && cell.mass && cell.mass >= config.defaultPlayerMass * 2) {
         cell.mass = cell.mass / 2;

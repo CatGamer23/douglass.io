@@ -641,7 +641,9 @@ function gameLoop() {
       config.screenWidth / 2,
       config.screenHeight / 2
     );
-  } else if (!config.disconnected) {
+  };
+
+  if (!config.disconnected) {
     if (config.gameStart) {
       graph.fillStyle = config.backgroundColor;
       graph.fillRect(0, 0, config.screenWidth, config.screenHeight);
