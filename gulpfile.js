@@ -64,20 +64,15 @@ gulp.task(
   })
 );
 
-gulp.task("build", gulp.series("build-client", "build-server"));//, "test"));
+gulp.task("build", gulp.series("build-client", "build-server")); //, "test"));
 
 gulp.task(
   "watch",
   gulp.series("build", async () => {
     gulp.watch(
-      ["src/client/**/*.*"],
-      gulp.series("build-client", "move-client")
+      ["src/**/*.*"],
+      gulp.series("build-server", "build-client", "move-client", "run-only")
     );
-    gulp.watch(
-      ["src/server/*.*", "src/server/**/*.js"],
-      gulp.series("build-server")
-    );
-    gulp.series("run-only");
   })
 );
 
