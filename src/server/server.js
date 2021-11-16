@@ -6,6 +6,7 @@ const io = require("socket.io")(http);
 const SAT = require("sat");
 const sql = require("mysql");
 const quadtree = require("simple-quadtree");
+const fs = require("fs");
 
 // Import game settings.
 const config = require("./../config.json");
@@ -548,6 +549,13 @@ io.on("connection", (socket) => {
       }
       currentPlayer.lastSplit = new Date().getTime();
     }
+  });
+
+  // Give list of skins
+  socket.on("getSkins", () => {
+    fs.readdirSync("./skins/").forEach((file) => {
+      socket.emit("skinResponse", btoa(file));
+    });
   });
 });
 

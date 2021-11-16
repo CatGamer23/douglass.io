@@ -54,6 +54,8 @@ window.onload = () => {
   const spectateButton = document.getElementById("spectateButton");
   const nickErrorText = document.querySelector("#startMenu .input-error");
 
+  socket.emit("getSkins");
+
   spectateButton.onclick = () => {
     startGame("spectate");
   };
@@ -321,6 +323,11 @@ function setupSocket(socket) {
   socket.on("virusSplit", (virusCell) => {
     socket.emit("2", virusCell);
     reenviar = false;
+  });
+
+  socket.on("skinResponse", (fileBase64) => {
+    const skinList = document.getElementById("skinList");
+    skinList.appendChild(document.createElement("img")).src = "data:image/png;base64," + fileBase64;
   });
 }
 
@@ -641,7 +648,7 @@ function gameLoop() {
       config.screenWidth / 2,
       config.screenHeight / 2
     );
-  };
+  }
 
   if (!config.disconnected) {
     if (config.gameStart) {
