@@ -54,7 +54,7 @@ window.onload = () => {
   const spectateButton = document.getElementById("spectateButton");
   const nickErrorText = document.querySelector("#startMenu .input-error");
 
-  socket.emit("getSkins");
+  // socket.emit("getSkins");
 
   spectateButton.onclick = () => {
     startGame("spectate");

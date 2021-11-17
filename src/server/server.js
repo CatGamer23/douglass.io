@@ -358,7 +358,11 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     if (util.findIndex(users, currentPlayer.id) > -1)
       users.splice(util.findIndex(users, currentPlayer.id), 1);
-    console.log("[INFO] User " + currentPlayer.name + " disconnected!");
+    if (currentPlayer.name) {
+      console.log("[INFO] Player " + currentPlayer.name + " disconnected!");
+    } else {
+      console.log("[INFO] An unnamed cell disconnected!");
+    }
 
     socket.broadcast.emit("playerDisconnect", { name: currentPlayer.name });
   });
@@ -555,7 +559,10 @@ io.on("connection", (socket) => {
   socket.on("getSkins", () => {
     fs.readdirSync("./skins/").forEach((file) => {
       fs.readFile("./skins/" + file, (err, data) => {
-        socket.emit("skinResponse", "data:image/png;base64," + data.toString("base64"));
+        socket.emit(
+          "skinResponse",
+          "data:image/png;base64," + data.toString("base64")
+        );
       });
     });
   });

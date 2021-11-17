@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'development',
   entry: "./src/client/js/main.js",
   output: {
     path: require("path").resolve("./src/bin/client/js"),
@@ -11,6 +12,10 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: [{ loader: "babel-loader" }],
+      },
+      {
+        test: /\.(png|jpe?g|svg|gif)$/,
+        type: "asset/resource",
       },
     ],
   },
