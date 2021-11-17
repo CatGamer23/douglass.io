@@ -325,9 +325,9 @@ function setupSocket(socket) {
     reenviar = false;
   });
 
-  socket.on("skinResponse", (fileBase64) => {
+  socket.on("skinResponse", (data) => {
     const skinList = document.getElementById("skinList");
-    skinList.appendChild(document.createElement("img")).src = "data:image/png;base64," + fileBase64;
+    skinList.appendChild(document.createElement("img")).src = data;
   });
 }
 

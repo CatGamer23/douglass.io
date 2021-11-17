@@ -554,7 +554,9 @@ io.on("connection", (socket) => {
   // Give list of skins
   socket.on("getSkins", () => {
     fs.readdirSync("./skins/").forEach((file) => {
-      socket.emit("skinResponse", btoa(file));
+      fs.readFile("./skins/" + file, (err, data) => {
+        socket.emit("skinResponse", "data:image/png;base64," + data.toString("base64"));
+      });
     });
   });
 });
