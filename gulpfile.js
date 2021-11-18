@@ -31,6 +31,12 @@ gulp.task("move-config", async () => {
   return gulp.src(["./config.json"]).pipe(gulp.dest("./bin/"));
 });
 
+gulp.task("move-images", async () => {
+  return gulp
+    .src(["./src/server/skins/**/*.*"])
+    .pipe(gulp.dest("./bin/server/skins/"));
+});
+
 gulp.task(
   "test",
   gulp.series("lint", async () => {
@@ -56,7 +62,7 @@ gulp.task(
 
 gulp.task(
   "build-server",
-  gulp.series("lint", "move-config", async () => {
+  gulp.series("lint", "move-config", "move-images", async () => {
     return gulp
       .src(["src/server/**/*.*", "src/server/**/*.js"])
       .pipe(babel())
