@@ -33,7 +33,7 @@ gulp.task("move-config", async () => {
 
 gulp.task("move-images", async () => {
   return gulp
-    .src(["./src/server/skins/**/*.*"])
+    .src(["./src/server/skins/*.png"])
     .pipe(gulp.dest("./bin/server/skins/"));
 });
 
