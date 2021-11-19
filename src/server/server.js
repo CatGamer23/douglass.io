@@ -560,7 +560,7 @@ io.on("connection", (socket) => {
   socket.on("getSkins", () => {
     console.log("getSkins called");
     // var temp = fs.readdirSync("./skins");
-    const temp = await globby(["*", "!cake"]);
+    var temp = await globby("./skins/*.png"); // jshint ignore:line
     console.log(temp);
     // fs.readdirSync("./skins/").forEach((file) => {
     //   fs.readFile("./skins/" + file, (err, data) => {
