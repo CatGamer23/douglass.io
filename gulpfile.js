@@ -14,7 +14,7 @@ gulp.task("lint", async () => {
     .pipe(
       jshint({
         // esnext: true,
-        esversion: 8,
+        esversion: 10,
       })
     )
     .pipe(jshint.reporter("default", { verbose: true }))
