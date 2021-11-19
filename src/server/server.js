@@ -13,6 +13,7 @@ const config = require("./../config.json");
 
 // Import utilities.
 const util = require("./util");
+const { stdout } = require("process");
 
 // Call sqlinfo
 const sqlDB = config.sqlinfo;
@@ -133,7 +134,7 @@ function movePlayer(player) {
       if (j != i && player.cells[i] !== undefined) {
         var distance = Math.sqrt(
           Math.pow(player.cells[j].y - player.cells[i].y, 2) +
-            Math.pow(player.cells[j].x - player.cells[i].x, 2)
+          Math.pow(player.cells[j].x - player.cells[i].x, 2)
         );
         var radiusTotal = player.cells[i].radius + player.cells[j].radius;
         if (distance < radiusTotal) {
@@ -373,13 +374,13 @@ io.on("connection", (socket) => {
     if (config.logChat === 1) {
       console.log(
         "[CHAT] [" +
-          new Date().getHours() +
-          ":" +
-          new Date().getMinutes() +
-          "] " +
-          _sender +
-          ": " +
-          _message
+        new Date().getHours() +
+        ":" +
+        new Date().getMinutes() +
+        "] " +
+        _sender +
+        ": " +
+        _message
       );
     }
     socket.broadcast.emit("serverSendPlayerChat", {
@@ -403,14 +404,14 @@ io.on("connection", (socket) => {
       // TODO: Actually log incorrect passwords.
       console.log(
         "[ADMIN] " +
-          currentPlayer.name +
-          " attempted to log in with incorrect password."
+        currentPlayer.name +
+        " attempted to log in with incorrect password."
       );
       socket.emit("serverMSG", "Password incorrect, attempt logged.");
       pool.query(
         "INSERT INTO logging SET name=" +
-          currentPlayer.name +
-          ', reason="Invalid login attempt as admin"'
+        currentPlayer.name +
+        ', reason="Invalid login attempt as admin"'
       );
     }
   });
@@ -433,18 +434,18 @@ io.on("connection", (socket) => {
           if (reason !== "") {
             console.log(
               "[ADMIN] User " +
-                users[e].name +
-                " kicked successfully by " +
-                currentPlayer.name +
-                " for reason " +
-                reason
+              users[e].name +
+              " kicked successfully by " +
+              currentPlayer.name +
+              " for reason " +
+              reason
             );
           } else {
             console.log(
               "[ADMIN] User " +
-                users[e].name +
-                " kicked successfully by " +
-                currentPlayer.name
+              users[e].name +
+              " kicked successfully by " +
+              currentPlayer.name
             );
           }
           socket.emit(
@@ -463,8 +464,8 @@ io.on("connection", (socket) => {
     } else {
       console.log(
         "[ADMIN] " +
-          currentPlayer.name +
-          " is trying to use -kick but isn't an admin."
+        currentPlayer.name +
+        " is trying to use -kick but isn't an admin."
       );
       socket.emit("serverMSG", "You are not permitted to use this command.");
     }
@@ -558,16 +559,15 @@ io.on("connection", (socket) => {
   // Give list of skins
   socket.on("getSkins", () => {
     console.log("getSkins called");
-    // var temp = fs.readdirSync("./skins");
-    // console.log(temp);
-    // fs.readdirSync("./skins/").forEach((file) => {
-    //   fs.readFile("./skins/" + file, (err, data) => {
-    //     socket.emit(
-    //       "skinResponse",
-    //       "data:image/png;base64," + data.toString("base64")
-    //     );
-    //   });
-    // });
+    fs.readdirSync("./bin/server/skins/").forEach((file) => {
+      fs.readFile("./bin/server/skins/" + file, (err, data) => {
+        if (err) console.log(err);
+        socket.emit(
+          "skinResponse",
+          "data:image/png;base64," + data.toString("base64")
+        );
+      });
+    });
   });
 });
 
@@ -635,11 +635,11 @@ function tickPlayer(currentPlayer) {
     if (
       collision.aUser.mass > collision.bUser.mass * 1.1 &&
       collision.aUser.radius >
-        Math.sqrt(
-          Math.pow(collision.aUser.x - collision.bUser.x, 2) +
-            Math.pow(collision.aUser.y - collision.bUser.y, 2)
-        ) *
-          1.75
+      Math.sqrt(
+        Math.pow(collision.aUser.x - collision.bUser.x, 2) +
+        Math.pow(collision.aUser.y - collision.bUser.y, 2)
+      ) *
+      1.75
     ) {
       // console.log("[DEBUG] Killing user: " + collision.bUser.id);
       // console.log("[DEBUG] Collision info:");
@@ -755,7 +755,7 @@ function gameloop() {
       for (var z = 0; z < users[i].cells.length; z++) {
         if (
           users[i].cells[z].mass * (1 - config.massLossRate / 1000) >
-            config.defaultPlayerMass &&
+          config.defaultPlayerMass &&
           users[i].massTotal > config.minMassLoss
         ) {
           var massLoss =
