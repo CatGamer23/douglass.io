@@ -7,7 +7,6 @@ const SAT = require("sat");
 const sql = require("mysql");
 const quadtree = require("simple-quadtree");
 const fs = require("fs");
-const globby = require("globby");
 
 // Import game settings.
 const config = require("./../config.json");
@@ -560,8 +559,6 @@ io.on("connection", (socket) => {
   socket.on("getSkins", () => {
     console.log("getSkins called");
     // var temp = fs.readdirSync("./skins");
-    var temp = await globby("./skins/*.png"); // jshint ignore:line
-    console.log(temp);
     // fs.readdirSync("./skins/").forEach((file) => {
     //   fs.readFile("./skins/" + file, (err, data) => {
     //     socket.emit(
