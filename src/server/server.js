@@ -6,7 +6,7 @@ const io = require("socket.io")(http);
 const SAT = require("sat");
 const sql = require("mysql");
 const quadtree = require("simple-quadtree");
-const fs = require("graceful-fs");
+const fs = require("fs");
 
 // Import game settings.
 const config = require("./../config.json");
@@ -558,8 +558,8 @@ io.on("connection", (socket) => {
   // Give list of skins
   socket.on("getSkins", () => {
     console.log("getSkins called");
-    var temp = fs.readdirSync("./skins");
-    console.log(temp);
+    // var temp = fs.readdirSync("./skins");
+    // console.log(temp);
     // fs.readdirSync("./skins/").forEach((file) => {
     //   fs.readFile("./skins/" + file, (err, data) => {
     //     socket.emit(
