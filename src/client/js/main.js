@@ -49,62 +49,6 @@ function validNick() {
   return regex.exec(playerNameInput.value) !== null;
 }
 
-window.onload = () => {
-  const startButton = document.getElementById("startButton");
-  const spectateButton = document.getElementById("spectateButton");
-  const nickErrorText = document.querySelector("#startMenu .input-error");
-
-  spectateButton.onclick = () => {
-    startGame("spectate");
-  };
-
-  startButton.onclick = () => {
-    // Checks if the nick is valid.
-    if (validNick()) {
-      nickErrorText.style.opacity = 0;
-      startGame("player");
-    } else {
-      nickErrorText.style.opacity = 1;
-    }
-  };
-
-  const settingsMenu = document.getElementById("settingsButton");
-  const settings = document.getElementById("settings");
-
-  settingsMenu.onclick = () => {
-    if (settings.style.maxHeight == "300px") {
-      settings.style.maxHeight = "0px";
-    } else {
-      settings.style.maxHeight = "300px";
-    }
-  };
-
-  const skinSelectorMenu = document.getElementById("skinSelectorButton");
-  const skinSelector = document.getElementById("skinSelector");
-
-  skinSelectorMenu.onclick = () => {
-    socket.emit("getSkins");
-    if (skinSelector.style.maxHeight == "300px") {
-      skinSelector.style.maxHeight = "0px";
-    } else {
-      skinSelector.style.maxHeight = "300px";
-    }
-  };
-
-  playerNameInput.addEventListener("keypress", (e) => {
-    const key = e.key;
-
-    if (key === config.KEY_ENTER) {
-      if (validNick()) {
-        nickErrorText.style.opacity = 0;
-        startGame("player");
-      } else {
-        nickErrorText.style.opacity = 1;
-      }
-    }
-  });
-};
-
 // TODO: Break out into GameControls.
 
 var foodConfig = {
@@ -212,24 +156,24 @@ function setupSocket(socket) {
   socket.on("playerDied", (data) => {
     window.chat.addSystemLine(
       "{GAME} - <b>" +
-        (data.name.length < 1 ? "An unnamed cell" : data.name) +
-        "</b> was eaten."
+      (data.name.length < 1 ? "An unnamed cell" : data.name) +
+      "</b> was eaten."
     );
   });
 
   socket.on("playerDisconnect", (data) => {
     window.chat.addSystemLine(
       "{GAME} - <b>" +
-        (data.name.length < 1 ? "An unnamed cell" : data.name) +
-        "</b> disconnected."
+      (data.name.length < 1 ? "An unnamed cell" : data.name) +
+      "</b> disconnected."
     );
   });
 
   socket.on("playerJoin", (data) => {
     window.chat.addSystemLine(
       "{GAME} - <b>" +
-        (data.name.length < 1 ? "An unnamed cell" : data.name) +
-        "</b> joined."
+      (data.name.length < 1 ? "An unnamed cell" : data.name) +
+      "</b> joined."
     );
   });
 
@@ -339,7 +283,63 @@ function setupSocket(socket) {
     console.log("\n");
     skinList.appendChild(img);
   });
-}
+};
+
+window.onload = () => {
+  const startButton = document.getElementById("startButton");
+  const spectateButton = document.getElementById("spectateButton");
+  const nickErrorText = document.querySelector("#startMenu .input-error");
+
+  spectateButton.onclick = () => {
+    startGame("spectate");
+  };
+
+  startButton.onclick = () => {
+    // Checks if the nick is valid.
+    if (validNick()) {
+      nickErrorText.style.opacity = 0;
+      startGame("player");
+    } else {
+      nickErrorText.style.opacity = 1;
+    }
+  };
+
+  const settingsMenu = document.getElementById("settingsButton");
+  const settings = document.getElementById("settings");
+
+  settingsMenu.onclick = () => {
+    if (settings.style.maxHeight == "300px") {
+      settings.style.maxHeight = "0px";
+    } else {
+      settings.style.maxHeight = "300px";
+    }
+  };
+
+  const skinSelectorMenu = document.getElementById("skinSelectorButton");
+  const skinSelector = document.getElementById("skinSelector");
+
+  skinSelectorMenu.onclick = () => {
+    socket.emit("getSkins");
+    if (skinSelector.style.maxHeight == "300px") {
+      skinSelector.style.maxHeight = "0px";
+    } else {
+      skinSelector.style.maxHeight = "300px";
+    }
+  };
+
+  playerNameInput.addEventListener("keypress", (e) => {
+    const key = e.key;
+
+    if (key === config.KEY_ENTER) {
+      if (validNick()) {
+        nickErrorText.style.opacity = 0;
+        startGame("player");
+      } else {
+        nickErrorText.style.opacity = 1;
+      }
+    }
+  });
+};
 
 function drawCircle(centerX, centerY, radius, sides) {
   var theta = 0;
@@ -443,28 +443,28 @@ function drawPlayers(order) {
       } else {
         x = valueInRange(
           -cellCurrent.x -
-            player.x +
-            config.screenWidth / 2 +
-            cellCurrent.radius / 3,
+          player.x +
+          config.screenWidth / 2 +
+          cellCurrent.radius / 3,
           config.gameWidth -
-            cellCurrent.x +
-            config.gameWidth -
-            player.x +
-            config.screenWidth / 2 -
-            cellCurrent.radius / 3,
+          cellCurrent.x +
+          config.gameWidth -
+          player.x +
+          config.screenWidth / 2 -
+          cellCurrent.radius / 3,
           x
         );
         y = valueInRange(
           -cellCurrent.y -
-            player.y +
-            config.screenHeight / 2 +
-            cellCurrent.radius / 3,
+          player.y +
+          config.screenHeight / 2 +
+          cellCurrent.radius / 3,
           config.gameHeight -
-            cellCurrent.y +
-            config.gameHeight -
-            player.y +
-            config.screenHeight / 2 -
-            cellCurrent.radius / 3,
+          cellCurrent.y +
+          config.gameHeight -
+          player.y +
+          config.screenHeight / 2 -
+          cellCurrent.radius / 3,
           y
         );
       }
@@ -746,11 +746,11 @@ function resize() {
   player.screenWidth =
     c.width =
     config.screenWidth =
-      config.playerType == "player" ? window.innerWidth : config.gameWidth;
+    config.playerType == "player" ? window.innerWidth : config.gameWidth;
   player.screenHeight =
     c.height =
     config.screenHeight =
-      config.playerType == "player" ? window.innerHeight : config.gameHeight;
+    config.playerType == "player" ? window.innerHeight : config.gameHeight;
 
   if (config.playerType == "spectate") {
     player.x = config.gameWidth / 2;
