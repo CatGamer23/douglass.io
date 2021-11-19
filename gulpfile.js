@@ -11,12 +11,7 @@ const webpack = require("webpack-stream");
 gulp.task("lint", async () => {
   return gulp
     .src(["**/*.js", "!node_modules/**/*.js", "!bin/**/*.js"])
-    .pipe(
-      jshint({
-        // esnext: true,
-        esversion: 10,
-      })
-    )
+    .pipe(jshint({ esversion: 10 }))
     .pipe(jshint.reporter("default", { verbose: true }))
     .pipe(jshint.reporter("fail"));
 });
