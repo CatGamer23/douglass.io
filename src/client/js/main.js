@@ -41,7 +41,6 @@ function startGame(type) {
   window.chat.registerFunctions();
   window.canvas.socket = socket;
   config.socket = socket;
-  socket.emit("getSkins");
 }
 
 // Checks if the nick chosen contains valid alphanumeric characters (and underscores).
@@ -84,6 +83,7 @@ window.onload = () => {
   const skinSelector = document.getElementById("skinSelector");
 
   skinSelectorMenu.onclick = () => {
+    socket.emit("getSkins");
     if (skinSelector.style.maxHeight == "300px") {
       skinSelector.style.maxHeight = "0px";
     } else {
@@ -324,12 +324,19 @@ function setupSocket(socket) {
     reenviar = false;
   });
 
-  socket.on("skinResponse", (data) => {
+  socket.on("skinResponse", (data, fileName) => {
+    console.log(data);
+    console.log("\n");
+    console.log(fileName);
+    console.log("\n");
     const skinList = document.getElementById("skinList");
     const img = document.createElement("img");
     img.width = 80;
     img.height = 80;
+    img.alt = fileName;
     img.src = data;
+    console.log(img);
+    console.log("\n");
     skinList.appendChild(img);
   });
 }

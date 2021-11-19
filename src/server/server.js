@@ -564,7 +564,8 @@ io.on("connection", (socket) => {
         if (err) console.log(err);
         socket.emit(
           "skinResponse",
-          "data:image/png;base64," + data.toString("base64")
+          "data:image/png;base64," + data.toString("base64"),
+          file.split(".")[0]
         );
       });
     });
