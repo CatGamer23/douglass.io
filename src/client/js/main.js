@@ -109,7 +109,62 @@ $("#split").click(() => {
   window.canvas.reenviar = false;
 });
 
-// socket stuff.
+window.onload = () => {
+  const startButton = document.getElementById("startButton");
+  const spectateButton = document.getElementById("spectateButton");
+  const nickErrorText = document.querySelector("#startMenu .input-error");
+
+  spectateButton.onclick = () => {
+    startGame("spectate");
+  };
+
+  startButton.onclick = () => {
+    // Checks if the nick is valid.
+    if (validNick()) {
+      nickErrorText.style.opacity = 0;
+      startGame("player");
+    } else {
+      nickErrorText.style.opacity = 1;
+    }
+  };
+
+  const settingsMenu = document.getElementById("settingsButton");
+  const settings = document.getElementById("settings");
+
+  settingsMenu.onclick = () => {
+    if (settings.style.maxHeight == "300px") {
+      settings.style.maxHeight = "0px";
+    } else {
+      settings.style.maxHeight = "300px";
+    }
+  };
+
+  const skinSelectorMenu = document.getElementById("skinSelectorButton");
+  const skinSelector = document.getElementById("skinSelector");
+
+  skinSelectorMenu.onclick = () => {
+    if (skinSelector.style.maxHeight == "300px") {
+      skinSelector.style.maxHeight = "0px";
+    } else {
+      skinSelector.style.maxHeight = "300px";
+    }
+  };
+
+  playerNameInput.addEventListener("keypress", (e) => {
+    const key = e.key;
+
+    if (key === config.KEY_ENTER) {
+      if (validNick()) {
+        nickErrorText.style.opacity = 0;
+        startGame("player");
+      } else {
+        nickErrorText.style.opacity = 1;
+      }
+    }
+  });
+};
+
+// Setting up socket functions.
 function setupSocket(socket) {
   // Handle ping.
   socket.on("pongcheck", () => {
@@ -283,63 +338,12 @@ function setupSocket(socket) {
     console.log("\n");
     skinList.appendChild(img);
   });
-}
 
-window.onload = () => {
-  const startButton = document.getElementById("startButton");
-  const spectateButton = document.getElementById("spectateButton");
-  const nickErrorText = document.querySelector("#startMenu .input-error");
-
-  spectateButton.onclick = () => {
-    startGame("spectate");
-  };
-
-  startButton.onclick = () => {
-    // Checks if the nick is valid.
-    if (validNick()) {
-      nickErrorText.style.opacity = 0;
-      startGame("player");
-    } else {
-      nickErrorText.style.opacity = 1;
-    }
-  };
-
-  const settingsMenu = document.getElementById("settingsButton");
-  const settings = document.getElementById("settings");
-
-  settingsMenu.onclick = () => {
-    if (settings.style.maxHeight == "300px") {
-      settings.style.maxHeight = "0px";
-    } else {
-      settings.style.maxHeight = "300px";
-    }
-  };
-
-  const skinSelectorMenu = document.getElementById("skinSelectorButton");
-  const skinSelector = document.getElementById("skinSelector");
-
-  skinSelectorMenu.onclick = () => {
+  socket.on("connect", () => {
+    console.log("Connected to server");
     socket.emit("getSkins");
-    if (skinSelector.style.maxHeight == "300px") {
-      skinSelector.style.maxHeight = "0px";
-    } else {
-      skinSelector.style.maxHeight = "300px";
-    }
-  };
-
-  playerNameInput.addEventListener("keypress", (e) => {
-    const key = e.key;
-
-    if (key === config.KEY_ENTER) {
-      if (validNick()) {
-        nickErrorText.style.opacity = 0;
-        startGame("player");
-      } else {
-        nickErrorText.style.opacity = 1;
-      }
-    }
   });
-};
+}
 
 function drawCircle(centerX, centerY, radius, sides) {
   var theta = 0;
