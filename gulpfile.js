@@ -87,13 +87,6 @@ gulp.task(
 gulp.task(
   "run",
   gulp.series("build", async () => {
-    exec("node bin/server/server.js");
-  })
-);
-
-gulp.task(
-  "nodemon-run",
-  gulp.series("build", async () => {
     nodemon({
       script: "./bin/server/server.js",
       args: ["--quiet"],
