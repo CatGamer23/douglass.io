@@ -7,6 +7,7 @@ const util = require("gulp-util");
 const mocha = require("gulp-mocha");
 const todo = require("gulp-todo");
 const webpack = require("webpack-stream");
+const { exec } = require("child_process");
 
 gulp.task("lint", async () => {
   return gulp
@@ -86,23 +87,26 @@ gulp.task(
 gulp.task(
   "run",
   gulp.series("build", async () => {
+    exec("node bin/server/server.js");
+  })
+);
+
+gulp.task(
+  "nodemon-run",
+  gulp.series("build", async () => {
     nodemon({
       script: "./bin/server/server.js",
       args: ["--quiet"],
       ext: "html js css",
-    }).on("restart", (files) => {
-      util.log("App restarted due to: ", files);
     });
   })
 );
 
 gulp.task("run-only", async () => {
   nodemon({
-    script: "./server/server.js",
+    script: "./bin/server/server.js",
     args: ["--quiet"],
     ext: "html js css",
-  }).on("restart", (files) => {
-    util.log("App restarted due to: ", files);
   });
 });
 

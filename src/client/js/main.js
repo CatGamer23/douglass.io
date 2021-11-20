@@ -110,6 +110,9 @@ $("#split").click(() => {
 });
 
 window.onload = () => {
+  socket = io();
+  socket.emit("getSkins");
+
   const startButton = document.getElementById("startButton");
   const spectateButton = document.getElementById("spectateButton");
   const nickErrorText = document.querySelector("#startMenu .input-error");
@@ -337,11 +340,6 @@ function setupSocket(socket) {
     console.log(img);
     console.log("\n");
     skinList.appendChild(img);
-  });
-
-  socket.on("connect", () => {
-    console.log("Connected to server");
-    socket.emit("getSkins");
   });
 }
 
