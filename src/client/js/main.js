@@ -110,9 +110,6 @@ $("#split").click(() => {
 });
 
 window.onload = () => {
-  socket = io();
-  socket.emit("getSkins");
-
   const startButton = document.getElementById("startButton");
   const spectateButton = document.getElementById("spectateButton");
   const nickErrorText = document.querySelector("#startMenu .input-error");
