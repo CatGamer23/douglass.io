@@ -28,14 +28,6 @@ function loadSkins() {
 }
 
 function startGame() {
-  try {
-    config.playerSkin = document.querySelector("#skinList input:checked").value;
-  } catch (e) {
-    if (e instanceof TypeError) {
-      config.playerSkin = "randColor";
-    }
-  }
-
   config.playerName = playerNameInput.value
     .replace(/(<([^>]+)>)/gi, "")
     .substring(0, 25);
