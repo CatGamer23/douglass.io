@@ -834,7 +834,6 @@ function sendUpdates() {
                 name: f.name,
               };
             } else {
-              //console.log("Nombre: " + f.name + " Es Usuario");
               return {
                 x: f.x,
                 y: f.y,
