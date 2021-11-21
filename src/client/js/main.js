@@ -331,19 +331,14 @@ function setupSocket(socket) {
   });
 
   socket.on("skinResponse", (data, fileName) => {
-    console.log(data);
-    console.log("\n");
-    console.log(fileName);
-    console.log("\n");
     const skinList = document.getElementById("skinList");
     const img = document.createElement("img");
+    console.log(img);
     img.width = 80;
     img.height = 80;
     img.alt = fileName;
     img.src = data;
-    console.log(img);
-    console.log("\n");
-    skinList.appendChild(img);
+    skinList.appendChild(img); //'<li class="skinListImg"><button id="skinListImg">' + img + "</button></li>");
   });
 }
 

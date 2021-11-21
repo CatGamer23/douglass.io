@@ -558,7 +558,6 @@ io.on("connection", (socket) => {
 
   // Give list of skins
   socket.on("getSkins", () => {
-    console.log("getSkins called");
     fs.readdirSync("./bin/server/skins/").forEach((file) => {
       fs.readFile("./bin/server/skins/" + file, (err, data) => {
         if (err) console.log(err);
