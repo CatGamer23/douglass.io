@@ -333,7 +333,6 @@ function setupSocket(socket) {
   socket.on("skinResponse", (data, fileName) => {
     const skinList = document.getElementById("skinList");
     const img = document.createElement("img");
-    console.log(img);
     img.width = 80;
     img.height = 80;
     img.alt = fileName;
