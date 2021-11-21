@@ -17,22 +17,26 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
   config.mobile = true;
 }
 
-function startGame(type) {
+function loadSkins() {
+  const type = "player";
+  config.playerType = type;
+  if (!socket) {
+    socket = io({ query: "type=" + type });
+    setupSocket(socket);
+    socket.emit("getSkins");
+  }
+}
+
+function startGame() {
   config.playerName = playerNameInput.value
     .replace(/(<([^>]+)>)/gi, "")
     .substring(0, 25);
-  config.playerType = type;
 
   config.screenWidth = window.innerWidth;
   config.screenHeight = window.innerHeight;
 
   document.getElementById("startMenuWrapper").style.maxHeight = "0px";
   document.getElementById("gameAreaWrapper").style.opacity = 1;
-
-  if (!socket) {
-    socket = io({ query: "type=" + type });
-    setupSocket(socket);
-  }
 
   if (!config.animLoopHandle) animloop();
 
@@ -45,7 +49,7 @@ function startGame(type) {
 
 // Checks if the nick chosen contains valid alphanumeric characters (and underscores).
 function validNick() {
-  var regex = /^\w*$/;
+  var regex = /^[a-zA-Z0-9_-]*$/;
   return regex.exec(playerNameInput.value) !== null;
 }
 
@@ -110,19 +114,22 @@ $("#split").click(() => {
 });
 
 window.onload = () => {
+  loadSkins();
   const startButton = document.getElementById("startButton");
   const spectateButton = document.getElementById("spectateButton");
   const nickErrorText = document.querySelector("#startMenu .input-error");
 
   spectateButton.onclick = () => {
-    startGame("spectate");
+    socket = io({ query: "type=spectate" });
+    setupSocket(socket);
+    startGame();
   };
 
   startButton.onclick = () => {
     // Checks if the nick is valid.
     if (validNick()) {
       nickErrorText.style.opacity = 0;
-      startGame("player");
+      startGame();
     } else {
       nickErrorText.style.opacity = 1;
     }
