@@ -13,7 +13,6 @@ const config = require("./../config.json");
 
 // Import utilities.
 const util = require("./util");
-const { stdout } = require("process");
 
 // Call sqlinfo
 const sqlDB = config.sqlinfo;
