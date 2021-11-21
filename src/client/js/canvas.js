@@ -32,7 +32,7 @@ class Canvas {
 
   // Function called when a key is pressed, will change direction if arrow key.
   directionDown(event) {
-    var key = event.code;
+    var key = event.key;
     var self = this.parent; // have to do this so we are not using the cv object
     if (self.directional(key)) {
       self.directionLock = true;
@@ -45,7 +45,7 @@ class Canvas {
 
   // Function called when a key is lifted, will change direction if arrow key.
   directionUp(event) {
-    var key = event.code;
+    var key = event.key;
     if (this.directional(key)) {
       // this == the actual class
       if (this.newDirection(key, this.directions, false)) {
@@ -142,8 +142,9 @@ class Canvas {
 
   // Chat command callback functions.
   keyInput(event) {
-    var key = event.code;
+    var key = event.key;
     if (key === config.KEY_FIREFOOD && this.parent.reenviar) {
+      document.getElementById("split_cell").play();
       this.parent.socket.emit("1");
       this.parent.reenviar = false;
     } else if (key === config.KEY_SPLIT && this.parent.reenviar) {

@@ -103,15 +103,17 @@ roundFoodSetting.onchange = settings.toggleRoundFood;
 var c = window.canvas.canvas;
 var graph = c.getContext("2d");
 
-$("#feed").click(() => {
+document.getElementById("feed").onclick = () => {
+  // $("#feed").click(() => {
   socket.emit("1");
   window.canvas.reenviar = false;
-});
+};
 
-$("#split").click(() => {
+document.getElementById("split").onclick = () => {
+  // $("#split").click(() => {
   socket.emit("2");
   window.canvas.reenviar = false;
-});
+};
 
 window.onload = () => {
   loadSkins();
