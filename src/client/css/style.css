@@ -26,10 +26,38 @@ div {
   -ms-user-select: none; /* IE10+ */
 }
 
-.skinListImg {
-  padding: 5px;
-  cursor: pointer;
+#skinList {
+  margin: 0 auto;
+  text-align: center;
 }
+
+#skinList label {
+  margin: 5px;
+}
+
+#skinList input {
+  display: none;
+}
+
+#skinList span {
+  display: inline-block;
+}
+
+#skinList input:checked + span {
+  border: #4779c9 solid 2px;
+  border-radius: 5px;
+}
+
+/* #skinList img {
+  margin: 5px 5px 0px;
+  padding: 0;
+}
+
+#skinList span {
+  margin: 0;
+  padding: 0;
+  font-size: 18px !important;
+} */
 
 #split {
   position: absolute;

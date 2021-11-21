@@ -28,6 +28,14 @@ function loadSkins() {
 }
 
 function startGame() {
+  try {
+    config.playerSkin = document.querySelector("#skinList input:checked").value;
+  } catch (e) {
+    if (e instanceof TypeError) {
+      config.playerSkin = "randColor";
+    }
+  }
+
   config.playerName = playerNameInput.value
     .replace(/(<([^>]+)>)/gi, "")
     .substring(0, 25);
@@ -163,7 +171,7 @@ window.onload = () => {
     if (key === config.KEY_ENTER) {
       if (validNick()) {
         nickErrorText.style.opacity = 0;
-        startGame("player");
+        startGame();
       } else {
         nickErrorText.style.opacity = 1;
       }
@@ -332,12 +340,12 @@ function setupSocket(socket) {
 
   socket.on("skinResponse", (data, fileName) => {
     const skinList = document.getElementById("skinList");
-    const img = document.createElement("img");
-    img.width = 80;
-    img.height = 80;
-    img.alt = fileName;
-    img.src = data;
-    skinList.appendChild(img); //'<li class="skinListImg"><button id="skinListImg">' + img + "</button></li>");
+    fileName =
+      fileName.charAt(0).toUpperCase() + fileName.toLowerCase().slice(1);
+
+    var img = `<img width="60" height="60" alt="${fileName}" src="${data}"></img>`;
+    var imgTotal = `<label><input type="radio" name="skins" value="${fileName}"><span>${img}</span></label>`;
+    skinList.innerHTML += imgTotal;
   });
 }
 
