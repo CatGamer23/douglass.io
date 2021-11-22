@@ -536,11 +536,11 @@ io.on("connection", (socket) => {
       currentPlayer.cells.length < config.limitSplit &&
       currentPlayer.massTotal >= config.defaultPlayerMass * 2
     ) {
-      //Split single cell from virus
+      // Split single cell from virus
       if (virusCell) {
         splitCell(currentPlayer.cells[virusCell]);
       } else {
-        //Split all cells
+        // Split all cells
         if (
           currentPlayer.cells.length < config.limitSplit &&
           currentPlayer.massTotal >= config.defaultPlayerMass * 2
