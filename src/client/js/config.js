@@ -34,6 +34,6 @@ module.exports = {
   lineColor: "#CBD2D5",
   lightBackgroundColor: "#F2FBFF",
   lightLineColor: "#CBD2D5",
-  darkBackgroundColor: "#CBD2D5",
-  darkLineColor: "#F2FBFF",
+  darkBackgroundColor: "#696969",
+  darkLineColor: "#C0C0C0",
 };
