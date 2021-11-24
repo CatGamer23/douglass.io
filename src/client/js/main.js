@@ -334,11 +334,10 @@ function setupSocket(socket) {
 
   socket.on("skinResponse", (data, fileName) => {
     const skinList = document.getElementById("skinList");
-    fileName =
-      fileName.charAt(0).toUpperCase() + fileName.toLowerCase().slice(1);
+    const niceFileName = fileName.charAt(0).toUpperCase() + fileName.toLowerCase().slice(1);
 
-    var img = `<img width="60" height="60" alt="${fileName}" src="${data}"></img>`;
-    var imgTotal = `<label><input type="radio" name="skins" value="${fileName}"><span>${img}</span></label>`;
+    const img = `<img width="60" height="60" alt="${niceFileName}" src="${data}"></img>`;
+    const imgTotal = `<label><input type="radio" name="skins" value="${fileName}"><span>${img}</span></label>`;
     skinList.innerHTML += imgTotal;
   });
 }
