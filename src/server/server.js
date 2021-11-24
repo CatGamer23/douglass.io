@@ -9,7 +9,6 @@ const quadtree = require("simple-quadtree");
 const fs = require("fs");
 
 // Import game settings.
-console.log("<?php echo $_SERVER['SERVER_ADDR']; ?>");
 const config = require("./../config.json");
 
 // Import utilities.
