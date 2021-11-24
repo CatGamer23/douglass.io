@@ -4,7 +4,7 @@
   "description": "Agar.io clone for class.",
   "main": "server.js",
   "scripts": {
-    "build": "gulp build --silent",
+    "build": "gulp build",
     "start": "gulp run --silent",
     "watch": "gulp watch",
     "test": "gulp test --silent"
