@@ -1,4 +1,4 @@
 export NODE_OPTIONS=--openssl-legacy-provider
-npm run build
+gulp build
 clear
 node ./bin/server/server.js

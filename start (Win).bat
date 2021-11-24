@@ -1,4 +1,4 @@
 set NODE_OPTIONS="--openssl-legacy-provider"
-npm run build
+gulp build
 cls
 node "./bin/server/server.js"
