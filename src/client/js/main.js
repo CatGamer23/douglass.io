@@ -17,6 +17,8 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
   config.mobile = true;
 }
 
+function setSkin(skin) {}
+
 function loadSkins() {
   const type = "player";
   config.playerType = type;
@@ -334,9 +336,10 @@ function setupSocket(socket) {
 
   socket.on("skinResponse", (data, fileName) => {
     const skinList = document.getElementById("skinList");
-    const niceFileName = fileName.charAt(0).toUpperCase() + fileName.toLowerCase().slice(1);
+    const niceFileName =
+      fileName.charAt(0).toUpperCase() + fileName.toLowerCase().slice(1);
 
-    const img = `<img width="60" height="60" alt="${niceFileName}" src="${data}"></img>`;
+    const img = `<img width="60" height="60" onclick="setSkin()" alt="${niceFileName}" src="${data}"></img>`;
     const imgTotal = `<label><input type="radio" name="skins" value="${fileName}"><span>${img}</span></label>`;
     skinList.innerHTML += imgTotal;
   });
