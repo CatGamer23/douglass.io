@@ -218,27 +218,15 @@ function setupSocket(socket) {
   });
 
   socket.on("playerDied", (data) => {
-    window.chat.addSystemLine(
-      "{GAME} - <b>" +
-        (data.name.length < 1 ? "An unnamed cell" : data.name) +
-        "</b> was eaten."
-    );
+    window.chat.addSystemLine("{GAME} - <b>" + (data.name.length < 1 ? "An unnamed cell" : data.name) + "</b> was eaten.");
   });
 
   socket.on("playerDisconnect", (data) => {
-    window.chat.addSystemLine(
-      "{GAME} - <b>" +
-        (data.name.length < 1 ? "An unnamed cell" : data.name) +
-        "</b> disconnected."
-    );
+    window.chat.addSystemLine("{GAME} - <b>" + (data.name.length < 1 ? "An unnamed cell" : data.name) + "</b> disconnected.");
   });
 
   socket.on("playerJoin", (data) => {
-    window.chat.addSystemLine(
-      "{GAME} - <b>" +
-        (data.name.length < 1 ? "An unnamed cell" : data.name) +
-        "</b> joined."
-    );
+    window.chat.addSystemLine("{GAME} - <b>" + (data.name.length < 1 ? "An unnamed cell" : data.name) + "</b> joined.");
   });
 
   socket.on("leaderboard", (data) => {
@@ -445,28 +433,28 @@ function drawPlayers(order) {
       } else {
         x = valueInRange(
           -cellCurrent.x -
-            player.x +
-            config.screenWidth / 2 +
-            cellCurrent.radius / 3,
+          player.x +
+          config.screenWidth / 2 +
+          cellCurrent.radius / 3,
           config.gameWidth -
-            cellCurrent.x +
-            config.gameWidth -
-            player.x +
-            config.screenWidth / 2 -
-            cellCurrent.radius / 3,
+          cellCurrent.x +
+          config.gameWidth -
+          player.x +
+          config.screenWidth / 2 -
+          cellCurrent.radius / 3,
           x
         );
         y = valueInRange(
           -cellCurrent.y -
-            player.y +
-            config.screenHeight / 2 +
-            cellCurrent.radius / 3,
+          player.y +
+          config.screenHeight / 2 +
+          cellCurrent.radius / 3,
           config.gameHeight -
-            cellCurrent.y +
-            config.gameHeight -
-            player.y +
-            config.screenHeight / 2 -
-            cellCurrent.radius / 3,
+          cellCurrent.y +
+          config.gameHeight -
+          player.y +
+          config.screenHeight / 2 -
+          cellCurrent.radius / 3,
           y
         );
       }
@@ -748,11 +736,11 @@ function resize() {
   player.screenWidth =
     c.width =
     config.screenWidth =
-      config.playerType == "player" ? window.innerWidth : config.gameWidth;
+    config.playerType == "player" ? window.innerWidth : config.gameWidth;
   player.screenHeight =
     c.height =
     config.screenHeight =
-      config.playerType == "player" ? window.innerHeight : config.gameHeight;
+    config.playerType == "player" ? window.innerHeight : config.gameHeight;
 
   if (config.playerType == "spectate") {
     player.x = config.gameWidth / 2;
