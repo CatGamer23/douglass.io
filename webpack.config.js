@@ -3,7 +3,7 @@ module.exports = {
   entry: "./src/client/js/main.js",
   output: {
     path: require("path").resolve("./bin/client/js"),
-    library: "main",
+    // library: "main",
     filename: "main.js",
   },
   module: {
