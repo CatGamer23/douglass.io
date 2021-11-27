@@ -307,7 +307,8 @@ div {
   opacity: 0;
 }
 
-@media only screen and (min-width: 1224px) {
+/* @media only screen and (min-width: 1334px) { */
+@media (hover: hover) and (pointer: fine) {
   #mobile {
     display: none;
   }
