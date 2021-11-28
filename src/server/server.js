@@ -624,8 +624,7 @@ function tickPlayer(currentPlayer) {
       Math.sqrt(
         Math.pow(collision.aUser.x - collision.bUser.x, 2) +
         Math.pow(collision.aUser.y - collision.bUser.y, 2)
-      ) *
-      1.75
+      ) * 1.75
     ) {
       // console.log("[DEBUG] Killing user: " + collision.bUser.id);
       console.log("[DEBUG] Collision info:");
