@@ -9,14 +9,18 @@ exports.validNick = (nickname) => {
 exports.massToRadius = (mass) => 4 + Math.sqrt(mass) * 6;
 
 // overwrite Math.log function
-exports.log = () => {
+exports.log = (() => {
   var log = Math.log;
   return (n, base) => log(n) / (base ? log(base) : 1);
-};
+})();
 
 // get the Euclidean distance between the edges of two shapes
 exports.getDistance = (point1, point2) =>
-  Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2)) - point1.radius - point2.radius;
+  Math.sqrt(
+    Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2)
+  ) -
+  point1.radius -
+  point2.radius;
 
 exports.randomInRange = (from, to) =>
   Math.floor(Math.random() * (to - from)) + from;
@@ -73,7 +77,8 @@ exports.findIndex = (arr, id) => {
 };
 
 exports.randomColor = () => {
-  var color = "#" + ("00000" + ((Math.random() * (1 << 24)) | 0).toString(16)).slice(-6);
+  var color =
+    "#" + ("00000" + ((Math.random() * (1 << 24)) | 0).toString(16)).slice(-6);
   var c = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
   var r = parseInt(c[1], 16) - 32 > 0 ? parseInt(c[1], 16) - 32 : 0;
   var g = parseInt(c[2], 16) - 32 > 0 ? parseInt(c[2], 16) - 32 : 0;

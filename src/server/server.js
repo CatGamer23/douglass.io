@@ -628,8 +628,8 @@ function tickPlayer(currentPlayer) {
       1.75
     ) {
       // console.log("[DEBUG] Killing user: " + collision.bUser.id);
-      // console.log("[DEBUG] Collision info:");
-      // console.log(collision);
+      console.log("[DEBUG] Collision info:");
+      console.log(collision);
 
       var numUser = util.findIndex(users, collision.bUser.id);
       if (numUser > -1) {
