@@ -9,7 +9,7 @@ const quadtree = require("simple-quadtree");
 const fs = require("fs");
 
 // Import game settings.
-const config = require("./../config.json");
+const config = require("./../config.jsonc");
 
 // Import utilities.
 const util = require("./util");
