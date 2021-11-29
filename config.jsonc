@@ -1,6 +1,6 @@
 {
-  "host": "192.168.254.21",
-  "port": 80,
+  "host": "localhost", // Can be a environment variable called "DOUGLASSIO_IP"
+  "port": 80, // Can be a environment variable called "DOUGLASSIO_PORT"
   "logpath": "logger.php",
   "foodMass": 1,
   "fireFood": 20,

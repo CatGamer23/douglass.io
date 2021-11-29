@@ -855,10 +855,8 @@ setInterval(gameloop, 1000);
 setInterval(sendUpdates, 1000 / config.networkUpdateFactor);
 
 // Don't touch, IP configurations.
-const ipaddress =
-  process.env.OPENSHIFT_NODEJS_IP || process.env.IP || config.host;
-const serverport =
-  process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || config.port;
+const ipaddress = process.env.DOUGLASSIO_IP || config.host;
+const serverport = process.env.DOUGLASSIO_PORT || config.port;
 
 http.listen(serverport, ipaddress, () => {
   console.log("[DEBUG] Listening on " + ipaddress + ":" + serverport);
