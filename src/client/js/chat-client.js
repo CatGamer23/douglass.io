@@ -13,7 +13,8 @@ class ChatClient {
       key = key.code;
       if (key === config.KEY_ESC) {
         chatInput.value = "";
-        this.canvas.cv.focus();
+        // this.canvas.focus();
+        document.getElementById("canvas").focus();
       }
     });
     config.chatClient = this;
@@ -138,7 +139,7 @@ class ChatClient {
 
         // Resets input.
         chatInput.value = "";
-        this.canvas.cv.focus();
+        document.getElementById("canvas").focus();
       }
     }
   }
