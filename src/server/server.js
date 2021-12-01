@@ -406,7 +406,7 @@ io.on("connection", (socket) => {
       }
       socket.emit("serverMSG", "Password incorrect, attempt logged.");
       // TODO: Improve incorrect password logging info.
-      fs.appendFileSync('logins.md', `|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
+      console.log('./logins.md', `|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
       // pool.query("INSERT INTO logging SET name=" + currentPlayer.name + ', reason="Invalid login attempt as admin"');
     }
   });
@@ -457,11 +457,11 @@ io.on("connection", (socket) => {
         socket.emit("serverMSG", "Could not locate user or user is an admin.");
       }
     } else {
-      console.log(
-        "[ADMIN] " +
-        currentPlayer.name +
-        " is trying to use -kick but isn't an admin."
-      );
+      if (currentPlayer.name) {
+        console.log("[ADMIN] " + currentPlayer.name + " is trying to use -kick but isn't an admin.");
+      } else {
+        console.log("[ADMIN] An unnamed cell is trying to use -kick but isn't an admin.");
+      }
       socket.emit("serverMSG", "You are not permitted to use this command.");
     }
   });
