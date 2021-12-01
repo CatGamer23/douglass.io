@@ -54,8 +54,6 @@ function validNick() {
   return regex.exec(playerNameInput.value) !== null;
 }
 
-// TODO: Break out into GameControls.
-
 var foodConfig = {
   border: 0,
 };

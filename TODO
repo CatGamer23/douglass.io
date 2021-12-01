@@ -1,0 +1,3 @@
+Fix spectator mode
+Fix splitting causing hitbox to not update
+Finish adding skins (applying selection)

@@ -7,7 +7,6 @@ const util = require("gulp-util");
 const mocha = require("gulp-mocha");
 const todo = require("gulp-todo");
 const webpack = require("webpack-stream");
-const { exec } = require("child_process");
 
 gulp.task("lint", async () => {
   return gulp
