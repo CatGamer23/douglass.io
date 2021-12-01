@@ -390,12 +390,20 @@ io.on("connection", (socket) => {
 
   socket.on("pass", (data) => {
     if (data[0] === config.adminPass) {
-      console.log("[ADMIN] " + currentPlayer.name + " just logged in as an admin!");
+      if (currentPlayer.name) {
+        console.log("[ADMIN] " + currentPlayer.name + " just logged in as an admin!");
+      } else {
+        console.log("[ADMIN] An unnamed cell just logged in as an admin!");
+      }
       socket.emit("serverMSG", "Welcome back " + currentPlayer.name);
       socket.broadcast.emit("serverMSG", currentPlayer.name + " just logged in as admin!");
       currentPlayer.admin = true;
     } else {
-      console.log("[ADMIN] " + currentPlayer.name + " attempted to log in with incorrect password.");
+      if (currentPlayer.name) {
+        console.log("[ADMIN] " + currentPlayer.name + " attempted to log in with incorrect password.");
+      } else {
+        console.log("[ADMIN] An unnamed cell attempted to log in with incorrect password.");
+      }
       socket.emit("serverMSG", "Password incorrect, attempt logged.");
       // TODO: Improve incorrect password logging info.
       fs.appendFileSync('logins.md', `|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
