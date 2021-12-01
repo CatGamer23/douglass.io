@@ -5,6 +5,7 @@ module.exports = {
     path: require("path").resolve("./bin/client/js"),
     // library: "main",
     filename: "main.js",
+    clean: true,
   },
   module: {
     rules: [

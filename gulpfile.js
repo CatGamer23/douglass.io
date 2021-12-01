@@ -59,9 +59,9 @@ gulp.task(
   "build-server",
   gulp.series("lint", "move-config", "move-images", async () => {
     return gulp
-      .src(["src/server/**/*.*", "src/server/**/*.js"])
+      .src(["./src/server/*.js", "./src/server/*.md"])
       .pipe(babel())
-      .pipe(gulp.dest("bin/server/"));
+      .pipe(gulp.dest("./bin/server/"));
   })
 );
 

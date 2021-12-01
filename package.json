@@ -50,6 +50,7 @@
     "stream-browserify": "^3.0.0",
     "util": "^0.12.4",
     "webpack": "^5.64.4",
+    "webpack-merge": "^5.8.0",
     "webpack-stream": "^7.0.0"
   },
   "browser": {

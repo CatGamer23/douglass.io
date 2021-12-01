@@ -1,3 +1,8 @@
+// TODO: Fix spectator mode
+// TODO: Fix splitting causing hitbox to not update
+// TODO: Finish adding skins (applying selection)
+// TODO: One more can't remember
+
 // Module Imports
 const express = require("express");
 const app = express();
@@ -19,13 +24,11 @@ const sqlDB = config.sqlinfo;
 
 // Variables
 var tree = quadtree(0, 0, config.gameWidth, config.gameHeight);
-
 var users = [];
 var massFood = [];
 var food = [];
 var virus = [];
 var sockets = {};
-
 var leaderboard = [];
 var leaderboardChanged = false;
 
@@ -399,7 +402,6 @@ io.on("connection", (socket) => {
       socket.broadcast.emit("serverMSG", currentPlayer.name + " just logged in as admin!");
       currentPlayer.admin = true;
     } else {
-      console.log(currentPlayer);
       if (currentPlayer.name) {
         console.log("[ADMIN] " + currentPlayer.name + " attempted to log in with incorrect password.");
       } else {
@@ -407,8 +409,8 @@ io.on("connection", (socket) => {
       }
       socket.emit("serverMSG", "Password incorrect, attempt logged.");
       // TODO: Improve incorrect password logging info.
-      // fs.appendFileSync('./login.md', `|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
-      // console.log(`|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
+      fs.appendFileSync('./logins.md', `|${currentPlayer.name ? currentPlayer.name : "An unnamed cell"}|${new Date().toLocaleString("en-US")}|${data[0] ? data[0] : "N/A"}|\n`);
+      // |NAME|DATE|PASSWORD|
       // pool.query("INSERT INTO logging SET name=" + currentPlayer.name + ', reason="Invalid login attempt as admin"');
     }
   });
