@@ -399,6 +399,7 @@ io.on("connection", (socket) => {
       socket.broadcast.emit("serverMSG", currentPlayer.name + " just logged in as admin!");
       currentPlayer.admin = true;
     } else {
+      console.log(currentPlayer);
       if (currentPlayer.name) {
         console.log("[ADMIN] " + currentPlayer.name + " attempted to log in with incorrect password.");
       } else {
@@ -406,7 +407,8 @@ io.on("connection", (socket) => {
       }
       socket.emit("serverMSG", "Password incorrect, attempt logged.");
       // TODO: Improve incorrect password logging info.
-      console.log('./logins.md', `|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
+      // fs.appendFileSync('./login.md', `|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
+      // console.log(`|${currentPlayer.name}|${new Date().toLocaleString("en-US")}| IP |`);
       // pool.query("INSERT INTO logging SET name=" + currentPlayer.name + ', reason="Invalid login attempt as admin"');
     }
   });
