@@ -1,7 +1,6 @@
 // TODO: Fix spectator mode
 // TODO: Fix splitting causing hitbox to not update
 // TODO: Finish adding skins (applying selection)
-// TODO: Make settings on homepage work
 // TODO: Reduce virus count
 
 // Module Imports

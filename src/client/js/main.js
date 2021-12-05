@@ -87,29 +87,30 @@ config.target = target;
 window.canvas = new Canvas();
 window.chat = new ChatClient();
 
-const visibleBorderSetting = document.getElementById("visBord");
-visibleBorderSetting.onchange = settings.toggleBorder;
+const visibleBorderSetting = document.getElementById("visBorder");
+visibleBorderSetting.onchange = () => { window.chat.toggleBorder(); };
 
 const showMassSetting = document.getElementById("showMass");
-showMassSetting.onchange = settings.toggleMass;
+showMassSetting.onchange = () => { window.chat.toggleMass(); };
 
 const continuitySetting = document.getElementById("continuity");
-continuitySetting.onchange = settings.toggleContinuity;
+continuitySetting.onchange = () => { window.chat.toggleContinuity(); };
 
 const roundFoodSetting = document.getElementById("roundFood");
-roundFoodSetting.onchange = settings.toggleRoundFood;
+roundFoodSetting.onchange = () => { window.chat.toggleRoundFood(); };
+
+const darkModeSetting = document.getElementById("darkMode");
+darkModeSetting.onchange = () => { window.chat.toggleDarkMode(); };
 
 var c = window.canvas.canvas;
 var graph = c.getContext("2d");
 
 document.getElementById("feed").onclick = () => {
-  // $("#feed").click(() => {
   socket.emit("1");
   window.canvas.reenviar = false;
 };
 
 document.getElementById("split").onclick = () => {
-  // $("#split").click(() => {
   socket.emit("2");
   window.canvas.reenviar = false;
 };
@@ -136,10 +137,10 @@ window.onload = () => {
     }
   };
 
-  const settingsMenu = document.getElementById("settingsButton");
+  const settingsButton = document.getElementById("settingsButton");
   const settings = document.getElementById("settings");
 
-  settingsMenu.onclick = () => {
+  settingsButton.onclick = () => {
     if (settings.style.maxHeight == "300px") {
       settings.style.maxHeight = "0px";
     } else {
@@ -413,9 +414,9 @@ function drawPlayers(order) {
     //   }
     //   /* jshint ignore:end */
     // } else {
-      graph.strokeStyle = "hsl(" + userCurrent.hue + ", 100%, 45%)";
-      graph.fillStyle = "hsl(" + userCurrent.hue + ", 100%, 50%)";
-      graph.lineWidth = playerConfig.border;
+    graph.strokeStyle = "hsl(" + userCurrent.hue + ", 100%, 45%)";
+    graph.fillStyle = "hsl(" + userCurrent.hue + ", 100%, 50%)";
+    graph.lineWidth = playerConfig.border;
     // }
 
     var xstore = [];
@@ -507,7 +508,7 @@ function drawPlayers(order) {
     graph.textBaseline = "middle";
     graph.font = "bold " + fontSize + "px sans-serif";
 
-    if (config.toggleMassState === 0) {
+    if (config.toggleMassState === false) {
       graph.strokeText(nameCell, circle.x, circle.y);
       graph.fillText(nameCell, circle.x, circle.y);
     } else {

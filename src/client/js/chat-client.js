@@ -196,11 +196,11 @@ class ChatClient {
   }
 
   toggleMass() {
-    if (config.toggleMassState === 0) {
-      config.toggleMassState = 1;
+    if (config.toggleMassState === false) {
+      config.toggleMassState = true;
       this.addSystemLine("Viewing mass enabled.");
     } else {
-      config.toggleMassState = 0;
+      config.toggleMassState = false;
       this.addSystemLine("Viewing mass disabled.");
     }
   }
@@ -216,9 +216,8 @@ class ChatClient {
   }
 
   toggleRoundFood(args) {
-    if (args || config.foodSides < 10) {
-      config.foodSides =
-        args && !isNaN(args[0]) && +args[0] >= 3 ? +args[0] : 10;
+    if (args || config.foodSides < 15) {
+      config.foodSides = args && !isNaN(args[0]) && +args[0] >= 3 ? +args[0] : 10;
       this.addSystemLine("Food is now rounded!");
     } else {
       config.foodSides = 5;

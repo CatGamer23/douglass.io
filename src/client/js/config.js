@@ -13,7 +13,7 @@ module.exports = {
   spin: -Math.PI,
   enemySpin: -Math.PI,
   mobile: false,
-  foodSides: 10,
+  foodSides: 15,
   virusSides: 20,
 
   // Canvas
@@ -29,7 +29,7 @@ module.exports = {
   kicked: false,
   continuity: false,
   startPingTime: 0,
-  toggleMassState: 0,
+  toggleMassState: false,
   backgroundColor: "#F2FBFF",
   lineColor: "#CBD2D5",
   lightBackgroundColor: "#F2FBFF",
