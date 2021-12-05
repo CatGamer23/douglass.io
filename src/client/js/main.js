@@ -118,14 +118,15 @@ document.getElementById("split").onclick = () => {
 window.onload = () => {
   loadSkins();
   const startButton = document.getElementById("startButton");
-  const spectateButton = document.getElementById("spectateButton");
+  // const spectateButton = document.getElementById("spectateButton");
   const nickErrorText = document.querySelector("#startMenu .input-error");
 
-  spectateButton.onclick = () => {
-    socket = io({ query: "type=spectate" });
-    setupSocket(socket);
-    startGame();
-  };
+  // spectateButton.onclick = () => {
+  //   socket.disconnect();
+  //   socket = io({ query: "type=spectate" });
+  //   setupSocket(socket);
+  //   startGame();
+  // };
 
   startButton.onclick = () => {
     // Checks if the nick is valid.

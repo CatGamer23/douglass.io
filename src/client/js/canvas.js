@@ -24,8 +24,8 @@ class Canvas {
       false
     );
     this.canvas.addEventListener("keydown", this.directionDown, false);
-    this.canvas.addEventListener("touchstart", this.touchInput, false);
-    this.canvas.addEventListener("touchmove", this.touchInput, false);
+    this.canvas.addEventListener("touchstart", this.touchInput, { passive: true });
+    this.canvas.addEventListener("touchmove", this.touchInput, { passive: true });
     this.canvas.parent = self;
     config.canvas = this;
   }
