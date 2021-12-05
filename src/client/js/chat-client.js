@@ -20,7 +20,6 @@ class ChatClient {
     config.chatClient = this;
   }
 
-  // TODO: Break out many of these GameControls into separate classes.
   registerFunctions() {
     this.registerCommand("ping", "Check your latency.", () => {
       this.checkLatency();

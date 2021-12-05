@@ -407,7 +407,6 @@ io.on("connection", (socket) => {
         console.log("[ADMIN] An unnamed cell attempted to log in with incorrect password.");
       }
       socket.emit("serverMSG", "Password incorrect, attempt logged.");
-      // TODO: Improve incorrect password logging info.
       fs.appendFileSync('./logins.md', `|${currentPlayer.name ? currentPlayer.name : "An unnamed cell"}|${new Date().toLocaleString("en-US")}|${data[0] ? data[0] : "N/A"}|\n`);
       // |NAME|DATE|PASSWORD|
       // pool.query("INSERT INTO logging SET name=" + currentPlayer.name + ', reason="Invalid login attempt as admin"');
