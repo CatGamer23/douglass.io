@@ -215,6 +215,7 @@ class ChatClient {
   }
 
   toggleRoundFood(args) {
+    // TODO: Add a toggle for round food. Currently just enables it.
     if (args || config.roundedFood ==  false) {
       config.foodSides = args && !isNaN(args[0]) && +args[0] >= 3 ? +args[0] : 10;
       config.roundedFood = true;

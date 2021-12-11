@@ -35,7 +35,9 @@ gulp.task("move-images", async () => {
 gulp.task(
   "test",
   gulp.series("lint", async () => {
-    gulp.src(["./test/**/*.js"]).pipe(mocha());
+    gulp
+      .src(["./test/**/*.js"])
+      .pipe(mocha());
   })
 );
 
@@ -46,11 +48,9 @@ gulp.task(
       .src(["src/client/js/main.js"])
       .pipe(uglify())
       .pipe(webpack(require("./webpack.config.js")))
-      .pipe(
-        babel({
-          presets: [["env", { modules: false }]],
-        })
-      )
+      .pipe(babel({
+        presets: [["env", { modules: false }]],
+      }))
       .pipe(gulp.dest("bin/client/js/"));
   })
 );
@@ -76,12 +76,12 @@ gulp.task("watch", async () => {
   );
 });
 
-gulp.task(
-  "todo",
-  gulp.series("lint", async () => {
-    gulp.src("src/**/*.js").pipe(todo()).pipe(gulp.dest("./"));
-  })
-);
+gulp.task("todo", async () => {
+  gulp
+    .src("src/**/*.js")
+    .pipe(todo())
+    .pipe(gulp.dest("./"))
+});
 
 gulp.task(
   "run",
