@@ -14,6 +14,7 @@ module.exports = {
   enemySpin: -Math.PI,
   mobile: false,
   foodSides: 15,
+  roundedFood: true,
   virusSides: 20,
 
   // Canvas

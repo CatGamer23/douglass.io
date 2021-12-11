@@ -215,11 +215,13 @@ class ChatClient {
   }
 
   toggleRoundFood(args) {
-    if (args || config.foodSides < 15) {
+    if (args || config.roundedFood ==  false) {
       config.foodSides = args && !isNaN(args[0]) && +args[0] >= 3 ? +args[0] : 10;
+      config.roundedFood = true;
       this.addSystemLine("Food is now rounded!");
     } else {
       config.foodSides = 5;
+      config.roundedFood = false;
       this.addSystemLine("Food is no longer rounded!");
     }
   }
