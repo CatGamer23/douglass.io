@@ -80,7 +80,7 @@ gulp.task("todo", async () => {
   gulp
     .src("src/**/*.js")
     .pipe(todo())
-    .pipe(gulp.dest("./"))
+    .pipe(gulp.dest("./"));
 });
 
 gulp.task(
