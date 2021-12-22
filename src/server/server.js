@@ -31,9 +31,6 @@ var sockets = {};
 var leaderboard = [];
 var leaderboardChanged = false;
 
-const Vector = SAT.Vector;
-const Circle = SAT.Circle;
-
 if (sqlDB.host !== "DEFAULT") {
   var pool = sql.createConnection({
     host: sqlDB.host,
@@ -583,7 +580,7 @@ function tickPlayer(currentPlayer) {
   movePlayer(currentPlayer);
 
   function funcFood(f) {
-    return SAT.pointInCircle(new Vector(f.x, f.y), playerCircle);
+    return SAT.pointInCircle(new SAT.Vector(f.x, f.y), playerCircle);
   }
 
   function deleteFood(f) {
@@ -592,7 +589,7 @@ function tickPlayer(currentPlayer) {
   }
 
   function eatMass(m) {
-    if (SAT.pointInCircle(new Vector(m.x, m.y), playerCircle)) {
+    if (SAT.pointInCircle(new SAT.Vector(m.x, m.y), playerCircle)) {
       if (m.id == currentPlayer.id && m.speed > 0 && z == m.num) return false;
       if (currentCell.mass > m.masa * 1.1) return true;
     }
@@ -605,8 +602,8 @@ function tickPlayer(currentPlayer) {
         var response = new SAT.Response();
         var collided = SAT.testCircleCircle(
           playerCircle,
-          new Circle(
-            new Vector(user.cells[i].x, user.cells[i].y),
+          new SAT.Circle(
+            new SAT.Vector(user.cells[i].x, user.cells[i].y),
             user.cells[i].radius
           ),
           response
@@ -659,8 +656,8 @@ function tickPlayer(currentPlayer) {
 
   for (var z = 0; z < currentPlayer.cells.length; z++) {
     var currentCell = currentPlayer.cells[z];
-    var playerCircle = new Circle(
-      new Vector(currentCell.x, currentCell.y),
+    var playerCircle = new SAT.Circle(
+      new SAT.Vector(currentCell.x, currentCell.y),
       currentCell.radius
     );
 
@@ -683,9 +680,9 @@ function tickPlayer(currentPlayer) {
       virus.splice(virusCollision, 1);
     }
 
-    var masaGanada = 0;
+    var earnedMass = 0;
     for (var m = 0; m < massEaten.length; m++) {
-      masaGanada += massFood[massEaten[m]].masa;
+      earnedMass += massFood[massEaten[m]].masa;
       massFood[massEaten[m]] = {};
       massFood.splice(massEaten[m], 1);
       for (var n = 0; n < massEaten.length; n++) {
@@ -696,9 +693,9 @@ function tickPlayer(currentPlayer) {
     }
 
     if (typeof currentCell.speed == "undefined") currentCell.speed = 6.25;
-    masaGanada += foodEaten.length * config.foodMass;
-    currentCell.mass += masaGanada;
-    currentPlayer.massTotal += masaGanada;
+    earnedMass += foodEaten.length * config.foodMass;
+    currentCell.mass += earnedMass;
+    currentPlayer.massTotal += earnedMass;
     currentCell.radius = util.massToRadius(currentCell.mass);
     playerCircle.r = currentCell.radius;
 
@@ -706,7 +703,7 @@ function tickPlayer(currentPlayer) {
     users.forEach(tree.put);
     var playerCollisions = [];
 
-    var otherUsers = tree.get(currentPlayer, check);
+    tree.get(currentPlayer, check);
 
     playerCollisions.forEach(collisionCheck);
   }
