@@ -403,22 +403,24 @@ function drawPlayers(order) {
     var points = 30 + ~~(cellCurrent.mass / 5);
     var increase = (Math.PI * 2) / points;
 
-    // if (config.skin) {
-    //   var skin = new Image();
-    //   skin.src = config.skin;
-    //   /* jshint ignore:start */
-    //   skin.onload = () => {
-    //     graph.beginPath();
-    //     graph.arc(userCurrent.h / 2, userCurrent.w / 2, radius, 0, Math.PI * 2, false);
-    //     graph.clip();
-    //     graph.drawImage(skin, userCurrent.x - 2 * userCurrent.size, userCurrent.y - 2 * userCurrent.size, 4 * userCurrent.size, 4 * userCurrent.size);
-    //   }
-    //   /* jshint ignore:end */
-    // } else {
+    if (config.skin) {
+      console.log(config.skin);
+      // graph.strokeStyle = "hsl(" + userCurrent.hue + ", 100%, 45%)";
+      // graph.fillStyle = "hsl(" + userCurrent.hue + ", 100%, 50%)";
+      // graph.lineWidth = playerConfig.border;
+      // var skin = new Image();
+      // skin.src = config.skin;
+      // skin.onload = () => {
+        // graph.beginPath();
+        // graph.arc(userCurrent.h / 2, userCurrent.w / 2, radius, 0, Math.PI * 2, false);
+        // graph.clip();
+        // graph.drawImage(config.skin, userCurrent.x - 2 * userCurrent.size, userCurrent.y - 2 * userCurrent.size); //, 4 * userCurrent.size, 4 * userCurrent.size);
+      // }
+    } else {
       graph.strokeStyle = "hsl(" + userCurrent.hue + ", 100%, 45%)";
       graph.fillStyle = "hsl(" + userCurrent.hue + ", 100%, 50%)";
       graph.lineWidth = playerConfig.border;
-    // }
+    }
 
     var xstore = [];
     var ystore = [];
