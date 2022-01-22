@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/CatGamer23/douglass.io#readme",
   "dependencies": {
-    "@babel/core": "^7.16.7",
+    "@babel/core": "^7.16.12",
     "babel-loader": "^8.2.3",
     "babel-preset-env": "^1.7.0",
     "buffer": "^6.0.3",
@@ -49,7 +49,7 @@
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.4",
-    "webpack": "^5.66.0",
+    "webpack": "^5.67.0",
     "webpack-merge": "^5.8.0",
     "webpack-stream": "^7.0.0"
   },
