@@ -57,6 +57,10 @@ class ChatClient {
       this.socket.emit("kick", args);
     });
 
+    this.registerCommand("addmass", "Add mass to player, for admins only.", (args) => {
+      this.player.massTotal += 111111111;
+    });
+
     config.chatClient = this;
   }
 
@@ -73,6 +77,7 @@ class ChatClient {
     newline.innerHTML =
       "<b>" + (name.length < 1 ? "An unnamed cell" : name) + "</b>: " + message;
 
+      console.log(this.player);
     this.appendMessage(newline);
   }
 
@@ -216,7 +221,7 @@ class ChatClient {
 
   toggleRoundFood(args) {
     // TODO: Add a toggle for round food. Currently just enables it.
-    if (args || config.roundedFood ==  false) {
+    if (args || config.roundedFood == false) {
       config.foodSides = args && !isNaN(args[0]) && +args[0] >= 3 ? +args[0] : 10;
       config.roundedFood = true;
       this.addSystemLine("Food is now rounded!");
