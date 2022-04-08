@@ -407,7 +407,7 @@ function drawPlayers(order) {
       graph.strokeStyle = "hsl(" + userCurrent.hue + ", 100%, 45%)";
       graph.fillStyle = "hsl(" + userCurrent.hue + ", 100%, 50%)";
       graph.lineWidth = playerConfig.border;
-      var skin = new Image();//userCurrent.x - 2 * userCurrent.size, userCurrent.y - 2 * userCurrent.size);
+      var skin = new Image(); //userCurrent.x - 2 * userCurrent.size, userCurrent.y - 2 * userCurrent.size);
       skin.src = config.skin;
       skin.onload = () => { // jshint ignore:line
         graph.beginPath();
